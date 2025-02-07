@@ -19,13 +19,20 @@
     // 当侧边栏没有焦点时，按 Space+e 会打开并聚焦到资源管理器
     "key": "space e",
     "command": "workbench.view.explorer",
-    "when": "!sideBarFocus"
+    "when": "!debugConsoleInputFocus && !findInputFocussed && !terminalFindWidgetFocus && !searchInputBoxFocus && !inQuickOpen && !terminalFocus && !sideBarFocus && neovim.mode != 'insert'"
   },
   {
     // 当侧边栏有焦点时，按 Space+e 会关闭侧边栏
     "key": "space e",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "sideBarFocus"
+    "when": "!debugConsoleInputFocus && !findInputFocussed && !terminalFindWidgetFocus && !searchInputBoxFocus && !inQuickOpen && !terminalFocus && sideBarFocus && neovim.mode != 'insert'"
+  },
+
+  {
+    "key": "space space",
+    "command": "workbench.action.quickOpen",
+    "when": "!debugConsoleInputFocus && !findInputFocussed && !terminalFindWidgetFocus && !searchInputBoxFocus && !inQuickOpen && !terminalFocus && neovim.mode != 'insert'"
   }
+
   ///////////////////////////       NeoVim区域  end       //////////////////////////////////////////////////////////////
 ]
