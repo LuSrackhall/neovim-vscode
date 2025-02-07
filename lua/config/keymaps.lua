@@ -51,6 +51,15 @@ local function toggle_term()
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
     ]]
+    -- VSCode 环境：启动 Windows Terminal
+    local wt_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
+    
+    -- 获取当前工作目录
+    local current_dir = vim.fn.getcwd()
+    
+    -- 使用 vim.fn.system 启动 Windows Terminal
+    -- -d 参数指定启动目录
+    vim.fn.system(string.format([[%s -d "%s"]], wt_path, current_dir))
   else
     -- Neovim 环境：使用 snacks 模块
     local ok, snacks = pcall(require, "snacks")
