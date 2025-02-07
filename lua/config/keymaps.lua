@@ -226,3 +226,63 @@ for key, mapping in pairs(clipboard_mappings) do
     desc = mapping.desc
   })
 end
+
+--[[---------------------------------------]]
+--[[        为vscode映射<leader>键         ]]
+--[[---------------------------------------]]
+-- VSCode 功能键映射
+local function setup_vscode_keymaps()
+  if not is_vscode() then
+    return
+  end
+
+  local ok, vscode = pcall(require, "vscode")
+  if not ok then
+    vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    return
+  end
+
+  -- 文件资源管理器
+  vim.keymap.set("n", "<leader>e", function()
+    -- 如果侧边栏已经打开并且聚焦，则关闭(其中vim.g.vscode_sidebar_focused 这个变量实际上并不存在, 写在这里只是方便阅读)
+    if vim.g.vscode_sidebar_focused then
+      vscode.call("workbench.action.toggleSidebarVisibility")
+    else
+      -- 否则打开并聚焦到资源管理器
+      vscode.call("workbench.view.explorer")
+    end
+  end, { desc = "切换文件资源管理器" })
+
+  -- 搜索文件
+  vim.keymap.set("n", "<leader> <leader>", function()
+    vscode.call("workbench.action.quickOpen")
+  end, { desc = "搜索文件" })
+
+  -- 搜索文件
+  vim.keymap.set("n", "<leader>ff", function()
+    vscode.call("workbench.action.quickOpen")
+  end, { desc = "搜索文件" })
+
+  -- 全局搜索
+  vim.keymap.set("n", "<leader>fg", function()
+    vscode.call("workbench.action.findInFiles")
+  end, { desc = "全局搜索" })
+
+  -- 切换问题面板
+  vim.keymap.set("n", "<leader>xp", function()
+    vscode.call("workbench.actions.view.problems")
+  end, { desc = "切换问题面板" })
+
+  -- 切换源代码管理
+  vim.keymap.set("n", "<leader>gg", function()
+    vscode.call("workbench.view.scm")
+  end, { desc = "切换源代码管理" })
+
+  -- 代码操作建议
+  vim.keymap.set("n", "<leader>ca", function()
+    vscode.call("editor.action.quickFix")
+  end, { desc = "代码操作建议" })
+end
+
+-- 调用设置函数
+setup_vscode_keymaps()
