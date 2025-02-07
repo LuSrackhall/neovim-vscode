@@ -2,11 +2,17 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+--[[---------------------------------------]]
+--[[              工具函数                 ]]
+--[[---------------------------------------]]
 -- 定义一个辅助函数，用于检查当前是否在 VSCode 环境中运行
 local function is_vscode()
   return vim.g.vscode ~= nil  -- 如果 vim.g.vscode 不为 nil，则表示在 VSCode 中运行
 end
 
+--[[---------------------------------------]]
+--[[            代码注释功能               ]]
+--[[---------------------------------------]]
 -- 删除 LazyVim 默认的 <C-/> 快捷键映射
 -- 这是必要的，因为我们要重新定义这个快捷键的功能
 vim.keymap.del("n", "<C-/>")
@@ -38,6 +44,9 @@ vim.keymap.set({ "n", "v" }, "<C-_>", "gcc", {
   remap = true  -- 允许递归映射
 })
 
+--[[---------------------------------------]]
+--[[            切换终端功能               ]]
+--[[---------------------------------------]]
 -- 设置终端切换快捷键
 local function toggle_term()
   if is_vscode() then
@@ -128,3 +137,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("startinsert")
   end,
 })
+
+--[[---------------------------------------]]
+--[[            剪贴板功能                 ]]
+--[[---------------------------------------]]
+
