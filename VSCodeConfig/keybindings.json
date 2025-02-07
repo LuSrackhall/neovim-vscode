@@ -1,0 +1,17 @@
+[
+  // some config....
+  // ...
+  // ...
+
+  ///////////////////////////        NeoVim区域 start       ////////////////////////////////////////////////////////////
+  {
+    // TIPS: 需要注意的是, 对于ctrl+c来说, 似乎绑定一个命令后, 就无法绑定其它命令了(主要是我所需要的 复制 和 esc 功能在这里似乎冲突了)
+    //       > TIPS: 比如我在这里定义的传递功能, 也影响到了vscode的系统复制api 以及neovim自带的 esc  api的触发。
+    "key": "ctrl+c",
+    "command": "vscode-neovim.send",
+    "when": "editorTextFocus && neovim.mode != 'normal'",
+    // Send this input to Neovim.
+    "args": "<C-c>"
+  }
+  ///////////////////////////       NeoVim区域  end       //////////////////////////////////////////////////////////////
+]

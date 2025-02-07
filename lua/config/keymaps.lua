@@ -145,11 +145,26 @@ vim.api.nvim_create_autocmd("TermOpen", {
 local function clipboard_operation(operation)
   if is_vscode() then
     -- VSCode 环境：使用 VSCode 的剪贴板命令
- --[[   local ok, vscode = pcall(require, "vscode")
+    local ok, vscode = pcall(require, "vscode")
     if ok then
       -- 什么都不用做, 交给vscode的默认行为处理即可(前提是禁用neovim插件中对 'ctrl+c' 的默认行为, 比如更改其键绑定为`ctrl+number8 ctrl+number8`, 有几个改几个, 都改成相同的按键即可。)
        if operation == "copy" then
+        -- TIPS: 在这里处理, 是因为在vscode中:
+        --       ```json
+        --       // keybindings.json
+        --       {
+        --         // TIPS: 需要注意的是, 对于ctrl+c来说, 似乎绑定一个命令后, 就无法绑定其它命令了(主要是我所需要的 复制 和 esc 功能在这里似乎冲突了)
+        --         //       > TIPS: 比如我在这里定义的传递功能, 也影响到了vscode的系统复制api 以及neovim自带的 esc  api的触发。
+        --         "key": "ctrl+c",
+        --         "command": "vscode-neovim.send",
+        --         "when": "editorTextFocus && neovim.mode != 'normal'",
+        --         // Send this input to Neovim.
+        --         "args": "<C-c>"
+        --       }
+        --       ```
+        --       上述代码块中的内容, 需原样粘贴到vscode的配置中, 方可使得当前判断中的内容生效。(否则不生效)
         vscode.call("editor.action.clipboardCopyAction")
+        vscode.call("vscode-neovim.escape")
         -- 向vscode-neovim插件发送调试信息
         vim.notify("执行vscode复制操作", vim.log.levels.DEBUG)
       -- 剪切操作已注释，因为使用频率极低(且VSCodeVim这个插件也没有配置这个快捷键)(最重要的是在V模式下使用此api时, 有机率发生整行都被剪切掉的现象, 无法保证一直都是仅剪切选中内容。)
@@ -164,7 +179,7 @@ local function clipboard_operation(operation)
       end
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
-    end ]]
+    end
   else
     -- Neovim 环境：使用系统剪贴板
     if operation == "copy" then
@@ -209,4 +224,3 @@ for key, mapping in pairs(clipboard_mappings) do
     desc = mapping.desc
   })
 end
-
