@@ -39,23 +39,26 @@ vim.keymap.set({ "n", "v" }, "<C-_>", "gcc", {
 })
 
 -- 设置终端切换快捷键
--- 使用 LazyVim 内置的终端功能
--- 提供多种按键组合以确保兼容性
---[[ 
--- lazyvim.util已废弃, 改为使用 snacks 模块
 local function toggle_term()
-  local LazyVimUtil = require("lazyvim.util")
-  LazyVimUtil.terminal()
-end 
-]]
--- 使用 snacks 模块
-local function toggle_term()
-  local ok, snacks = pcall(require, "snacks")
-
-  if ok then
-    snacks.terminal()
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的终端切换命令
+    --[[ 
+    -- 由于vscode的neovim插件仅在编辑器的命令模式起作用, 会造成在终端中无法切回关闭的问题, 因此必须在vscode中进行配置而不是这里。
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      vscode.call("workbench.action.terminal.toggleTerminal") 
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+    ]]
   else
-    vim.notify("无法加载 snacks 模块", vim.log.levels.WARN)
+    -- Neovim 环境：使用 snacks 模块
+    local ok, snacks = pcall(require, "snacks")
+    if ok then
+      snacks.terminal()
+    else
+      vim.notify("无法加载 snacks 模块", vim.log.levels.WARN)
+    end
   end
 end
 
@@ -79,16 +82,7 @@ local function map_terminal_keys()
   -- 遍历所有键并设置映射
   for _, key in ipairs(keys) do
     -- 设置映射
-    vim.keymap.set({ "n", "t" }, key, function()
-      local ok, snacks = pcall(require, "snacks")
-      if ok then
-        -- 如果模块加载成功，则调用终端切换功能
-        snacks.terminal()
-      else
-        -- 如果模块加载失败，则通知用户
-        vim.notify("无法加载 snacks 模块", vim.log.levels.WARN)
-      end
-    end, { 
+    vim.keymap.set({ "n", "t" }, key, toggle_term, { 
       -- 添加描述, 会在输入过程中在右下角显示。
       desc = "切换终端 (" .. key .. ")",
       -- 执行时不显示命令
