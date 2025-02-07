@@ -141,7 +141,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 --[[---------------------------------------]]
 --[[            剪贴板功能                 ]]
 --[[---------------------------------------]]
--- 定义剪贴板操作函数(TIPS: 定制的最终目的, 是为了让neovim更像VSCodeVim这个插件的行为)(vscode中, 只需要禁用插件自动给的'Ctrl+c'就可以了)
+-- 定义剪贴板操作函数
 local function clipboard_operation(operation)
   if is_vscode() then
     -- VSCode 环境：使用 VSCode 的剪贴板命令
@@ -181,12 +181,14 @@ local function clipboard_operation(operation)
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
   else
-    -- Neovim 环境：使用系统剪贴板
+    -- Neovim 环境：使用系统剪贴板，但保持与 vim 寄存器独立
     if operation == "copy" then
-      vim.cmd('normal! "+y')
-    -- elseif operation == "cut" then
-    --   vim.cmd('normal! "+d')
+      -- 仅复制到系统剪贴板，不影响 vim 寄存器
+      local old_reg = vim.fn.getreg('"')  -- 保存当前寄存器内容
+      vim.cmd('normal! "+y')  -- 复制到系统剪贴板
+      vim.fn.setreg('"', old_reg)  -- 恢复寄存器内容
     elseif operation == "paste" then
+      -- 仅从系统剪贴板粘贴，不影响 vim 寄存器
       vim.cmd('normal! "+p')
     end
   end

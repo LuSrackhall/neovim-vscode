@@ -6,5 +6,8 @@ local opt = vim.opt
 -- 取消动态行号
 opt.relativenumber = false
 
--- 取消与系统剪贴板的同步(若需要同步, 则注释掉此行即可)
-vim.opt.clipboard = ""
+-- 设置剪贴板选项
+-- 1. 取消与系统剪贴板的自动同步
+opt.clipboard = ""
+-- 2. 确保 vim 寄存器独立工作
+opt.clipboard:remove({ "unnamed", "unnamedplus" })
