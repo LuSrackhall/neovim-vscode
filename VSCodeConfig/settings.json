@@ -34,6 +34,23 @@
     "down",
     "backspace",
     "delete"
-  ]
+  ],
+
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    },
+    "jk": {
+      // Use lua to execute any logic
+      "command": "vscode-neovim.lua",
+      "args": [
+        [
+          "local code = require('vscode')",
+          "code.action('vscode-neovim.escape')",
+          "code.action('workbench.action.files.save')"
+        ]
+      ]
+    }
+  }
   ///////////////////////////       NeoVim区域  end       //////////////////////////////////////////////////////////////
 }
