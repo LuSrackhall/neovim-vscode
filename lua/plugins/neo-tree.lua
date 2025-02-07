@@ -2,7 +2,7 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   keys = {
     -- 移除默认的 <leader>e 绑定
-    { "<leader>e", false },
+    -- { "<leader>e", false },
     -- 添加 Ctrl-b 来切换侧边栏
     {
       "<C-b>",
