@@ -141,4 +141,72 @@ vim.api.nvim_create_autocmd("TermOpen", {
 --[[---------------------------------------]]
 --[[            剪贴板功能                 ]]
 --[[---------------------------------------]]
+-- 定义剪贴板操作函数(TIPS: 定制的最终目的, 是为了让neovim更像VSCodeVim这个插件的行为)(vscode中, 只需要禁用插件自动给的'Ctrl+c'就可以了)
+local function clipboard_operation(operation)
+  if is_vscode() then
+    -- VSCode 环境：使用 VSCode 的剪贴板命令
+ --[[   local ok, vscode = pcall(require, "vscode")
+    if ok then
+      -- 什么都不用做, 交给vscode的默认行为处理即可(前提是禁用neovim插件中对 'ctrl+c' 的默认行为, 比如更改其键绑定为`ctrl+number8 ctrl+number8`, 有几个改几个, 都改成相同的按键即可。)
+       if operation == "copy" then
+        vscode.call("editor.action.clipboardCopyAction")
+        -- 向vscode-neovim插件发送调试信息
+        vim.notify("执行vscode复制操作", vim.log.levels.DEBUG)
+      -- 剪切操作已注释，因为使用频率极低(且VSCodeVim这个插件也没有配置这个快捷键)(最重要的是在V模式下使用此api时, 有机率发生整行都被剪切掉的现象, 无法保证一直都是仅剪切选中内容。)
+      -- elseif operation == "cut" then
+        -- vscode.call("editor.action.clipboardCutAction")
+        -- -- 向vscode-neovim插件发送调试信息
+        -- vim.notify("执行vscode剪切操作", vim.log.levels.DEBUG)
+      elseif operation == "paste" then
+        vscode.call("editor.action.clipboardPasteAction")
+        -- 向vscode-neovim插件发送调试信息
+        vim.notify("执行vscode粘贴操作", vim.log.levels.DEBUG)
+      end
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end ]]
+  else
+    -- Neovim 环境：使用系统剪贴板
+    if operation == "copy" then
+      vim.cmd('normal! "+y')
+    -- elseif operation == "cut" then
+    --   vim.cmd('normal! "+d')
+    elseif operation == "paste" then
+      vim.cmd('normal! "+p')
+    end
+  end
+end
+
+-- 设置剪贴板快捷键
+local clipboard_mappings = {
+  -- 复制 (实际上直接交由vscode处理就好了, 只需要在vscode中禁用掉neovim插件自带的为vscode按键映射界面绑定的快捷键'ctrl+c'就可以了)
+  ["<C-c>"] = { -- 保留在此是因为neovim中的行为也是需要处理的
+    mode = {"v"},
+    action = function() clipboard_operation("copy") end,
+    desc = "复制到系统剪贴板"
+  },
+
+  -- 剪切 (默认注释掉，因为这个功能使用频率极低)(且VSCodeVim这个插件也没有配置这个快捷键)(最重要的是在V模式下使用此api时, 有机率发生整行都被剪切掉的现象, 无法保证一直都是仅剪切选中内容。)
+  -- ["<C-x>"] = {
+    -- mode = {"v"},
+    -- action = function() clipboard_operation("cut") end,
+    -- desc = "剪切到系统剪贴板"
+  -- },
+  
+  -- 粘贴
+  ["<C-v>"] = {
+    -- mode = {"n", "i"}, -- 实际上 i 模式下, 也是使用vscode的默认行为就好了, 注主要起作用的是n模式下的配置。不过为了安全起见这里我们也没必要配置了。
+    mode = {"i"}, -- 保留是因为在neovim中我还需要使用
+    action = function() clipboard_operation("paste") end,
+    desc = "从系统剪贴板粘贴"
+  },
+}
+
+-- 应用映射(不用改动)
+for key, mapping in pairs(clipboard_mappings) do
+  vim.keymap.set(mapping.mode, key, mapping.action, {
+    silent = true,
+    desc = mapping.desc
+  })
+end
 
