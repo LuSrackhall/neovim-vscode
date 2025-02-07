@@ -51,15 +51,35 @@ local function toggle_term()
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
     ]]
-    -- VSCode 环境：启动 Windows Terminal
-    local wt_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
-    
+    -- VSCode 环境：
+    -- 根据不同操作系统启动对应的终端
+    local terminal_path
+    if vim.fn.has('win32') == 1 then
+      -- Windows 环境使用 Windows Terminal
+      -- -- TIPS: vscode中使用说明, 通过<localleader>快捷键启用终端后, 可通过win自带的快捷键<Alt-Tab>来切回vscode。
+      -- --(如果新建的终端是多余的, 则可利用win终端自带的快捷键关闭。包括其它操作也是一样的。)
+      terminal_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
+    elseif vim.fn.has('mac') == 1 then
+      -- macOS 环境使用 iTerm2 或其他终端
+      terminal_path = "" -- TODO: 设置 macOS 终端路径
+    elseif vim.fn.has('unix') == 1 then
+      -- Linux 环境使用默认终端
+      terminal_path = "" -- TODO: 设置 Linux 终端路径
+    else
+      -- 其他未知操作系统
+      vim.notify("不支持的操作系统", vim.log.levels.WARN)
+      terminal_path = ""
+    end
     -- 获取当前工作目录
     local current_dir = vim.fn.getcwd()
     
-    -- 使用 vim.fn.system 启动 Windows Terminal
-    -- -d 参数指定启动目录
-    vim.fn.system(string.format([[%s -d "%s"]], wt_path, current_dir))
+    -- 使用 vim.fn.system 启动终端
+    if terminal_path ~= "" then
+      -- -d 参数指定启动目录
+      vim.fn.system(string.format([[%s -d "%s"]], terminal_path, current_dir))
+    else
+      vim.notify("未配置终端路径", vim.log.levels.WARN)
+    end
   else
     -- Neovim 环境：使用 snacks 模块
     local ok, snacks = pcall(require, "snacks")
