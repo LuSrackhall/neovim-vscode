@@ -2,29 +2,106 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- 定义一个辅助函数，用于检查当前是否在 VSCode 环境中运行
 local function is_vscode()
-  return vim.g.vscode ~= nil
+  return vim.g.vscode ~= nil  -- 如果 vim.g.vscode 不为 nil，则表示在 VSCode 中运行
 end
 
--- 禁用 LazyVim 默认的 <C-/> 映射（打开终端）
+-- 删除 LazyVim 默认的 <C-/> 快捷键映射
+-- 这是必要的，因为我们要重新定义这个快捷键的功能
 vim.keymap.del("n", "<C-/>")
 
--- 设置 <C-/> 映射
+-- 设置新的 <C-/> 映射，这是一个根据环境智能切换的映射
 vim.keymap.set("n", "<C-/>", function()
   if is_vscode() then
-    -- 在 VSCode 环境下调用 VSCode 的注释命令
-    --------------------------------------------------------------------------------------------------
-    -- require('vscode-neovim').call('editor.action.commentLine') -- 'vscode-neovim' 的模块现在已经弃用了, 由'vscode' 模块替代。
-    require('vscode').call('editor.action.commentLine')
-    --------------------------------------------------------------------------------------------------
+    -- VSCode 环境：调用 VSCode 的注释命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      vscode.call("editor.action.commentLine")
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
   else
-
-    -- 在普通 Neovim 环境下使用 vim 的注释功能
-    vim.cmd('normal gcc')  -- 需要确保安装了 Comment.nvim 插件
+    -- 纯 Neovim 环境：使用 vim 的注释功能
+    -- gcc 是 Comment.nvim 插件提供的注释命令
+    vim.cmd("normal gcc")
   end
-end, { silent = true, desc = "Toggle Comment" })
+end, { 
+  silent = true,  -- 执行时不显示命令
+  desc = "Toggle Comment"  -- 为这个映射添加描述
+})
 
--- 仅在非 VSCode 环境下设置终端快捷键
-if not is_vscode() then
-  vim.keymap.set("n", "<C-`>", "<cmd>ToggleTerm<cr>", { silent = true, desc = "Toggle Terminal" })
+-- 额外的注释功能映射
+-- 这是为了处理终端环境的特殊情况
+-- 在大多数终端中，按下 Ctrl+/ 实际上会发送 Ctrl+_, 这确保了在终端中也能正常工作。
+vim.keymap.set({ "n", "v" }, "<C-_>", "gcc", { 
+  remap = true  -- 允许递归映射
+})
+
+-- 设置终端切换快捷键
+-- 使用 LazyVim 内置的终端功能
+-- 提供多种按键组合以确保兼容性
+--[[ 
+-- lazyvim.util已废弃, 改为使用 snacks 模块
+local function toggle_term()
+  local LazyVimUtil = require("lazyvim.util")
+  LazyVimUtil.terminal()
+end 
+]]
+-- 使用 snacks 模块
+local function toggle_term()
+  local ok, snacks = pcall(require, "snacks")
+
+  if ok then
+    snacks.terminal()
+  else
+    vim.notify("无法加载 snacks 模块", vim.log.levels.WARN)
+  end
 end
+
+-- 尝试不同的快捷键写法
+-- 考虑在不同终端中，Ctrl+` 可能会被解释为不同的按键序列, 但都没能成功。
+local function map_terminal_keys()
+  -- 主要的终端切换键
+  local keys = {
+    -- "<C-`>",      -- 标准写法
+    -- "\x1E",       -- 某些终端中 Ctrl+` 会发送这个键码
+    -- "<C-~>",      -- Windows Terminal 可能的解释
+    -- "<C-]>",      -- 另一种可能的解释
+    -- "<C-Space>",  -- 通用替代方案
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --- -- -- --
+    -- 本地leader键方案(新主力键)
+    "<localleader>t",-- 本地leader键方案(新主力键)
+    "<F7>"           -- 功能键替代方案
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --- -- -- --
+  }
+
+  -- 遍历所有键并设置映射
+  for _, key in ipairs(keys) do
+    -- 设置映射
+    vim.keymap.set({ "n", "t" }, key, function()
+      local ok, snacks = pcall(require, "snacks")
+      if ok then
+        -- 如果模块加载成功，则调用终端切换功能
+        snacks.terminal()
+      else
+        -- 如果模块加载失败，则通知用户
+        vim.notify("无法加载 snacks 模块", vim.log.levels.WARN)
+      end
+    end, { 
+      -- 添加描述, 会在输入过程中在右下角显示。
+      desc = "切换终端 (" .. key .. ")",
+      -- 执行时不显示命令
+      silent = true,
+    })
+  end
+end
+
+map_terminal_keys()
+
+-- 确保终端在打开时进入插入模式
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+})
