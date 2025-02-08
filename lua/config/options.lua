@@ -24,7 +24,6 @@ vim.api.nvim_set_hl(0, 'YankHighlight', {
 
 -- 禁用 LazyVim 的默认 yank 高亮配置
 vim.api.nvim_create_autocmd("User", {
-  pattern = "LazyVimStarted",
   callback = function()
     -- 清除所有已存在的 TextYankPost 自动命令
     vim.api.nvim_clear_autocmds({ event = "TextYankPost" })
