@@ -292,11 +292,17 @@ local function setup_vscode_keymaps()
         -- Windows 环境使用 Windows Terminal
         local terminal_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
         -- 启动终端并运行 lazygit(通过-p参数指定wt使用 Git Bash, 需要注意的是-p后根的是wt中为某个shell配置的名称--这个名称取决与用户在终端中的自定义配置(比如我的是"Bash"))
-        vim.fn.system(string.format([[%s --fullscreen --window new -p "Bash" -d "%s" lazygit]], terminal_path, current_dir))
+        vim.fn.system(string.format([[%s --pos 160,90 --fullscreen --window new -p "Bash" -d "%s" lazygit]], terminal_path, current_dir))
         -- 1. `--fullscreen`：全屏模式启动，隐藏标题栏和边框
         -- 2. `--maximized`/`-M`：最大化窗口启动
         -- 3.  `--window new`: 在新的窗口中启动标签页。
         -- 4. `-p "Bash"`: 指定使用要使用的配置文件名称。(即wt中对于shell的配置名称)
+        -- 5. `focus`, `-f`：启动终端时进入焦点模式。
+        -- 6. `pos x,y`：启动终端时指定窗口位置，x 和 y 可选，可以使用默认值。
+        -- 7. `size c,r`：启动终端时指定列数（c）和行数（r）。
+        -- 8. `startingDirectory`, `-d`：指定启动目录。
+        -- 9. `title`：指定新标签的标题。
+
 
       elseif vim.fn.has("mac") == 1 then
         -- macOS 环境
