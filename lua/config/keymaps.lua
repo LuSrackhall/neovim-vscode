@@ -292,7 +292,7 @@ local function setup_vscode_keymaps()
         -- Windows 环境使用 Windows Terminal
         local terminal_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
         -- 启动终端并运行 lazygit(通过-p参数指定wt使用 Git Bash, 需要注意的是-p后根的是wt中为某个shell配置的名称--这个名称取决与用户在终端中的自定义配置(比如我的是"Bash"))
-        vim.fn.system(string.format([[%s -p "Bash" -d "%s" lazygit]], terminal_path, current_dir))
+        vim.fn.system(string.format([[%s --window new -p "Bash" -d "%s" lazygit]], terminal_path, current_dir))
       elseif vim.fn.has("mac") == 1 then
         -- macOS 环境
         -- TODO: 设置 macOS 终端路径和命令
