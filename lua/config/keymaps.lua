@@ -282,10 +282,28 @@ local function setup_vscode_keymaps()
     vscode.call("workbench.actions.view.problems")
   end, { desc = "切换问题面板" })
 
-  -- 切换源代码管理
+  -- 切换源代码管理(在vscode中, 使用lazygit来切换源代码管理)
   vim.keymap.set("n", "<leader>gg", function()
-    vscode.call("workbench.view.scm")
-  end, { desc = "切换源代码管理" })
+      -- 获取当前工作目录
+      local current_dir = vim.fn.getcwd()
+
+      -- 根据操作系统选择适当的终端和命令
+      if vim.fn.has("win32") == 1 then
+        -- Windows 环境使用 Windows Terminal
+        local terminal_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
+        vim.fn.system(string.format([[%s -d "%s" lazygit]], terminal_path, current_dir))
+      elseif vim.fn.has("mac") == 1 then
+        -- macOS 环境
+        -- TODO: 设置 macOS 终端路径和命令
+        vim.notify("macOS 环境暂未配置", vim.log.levels.WARN)
+      elseif vim.fn.has("unix") == 1 then
+        -- Linux 环境
+        -- TODO: 设置 Linux 终端路径和命令
+        vim.notify("Linux 环境暂未配置", vim.log.levels.WARN)
+      else
+        vim.notify("不支持的操作系统", vim.log.levels.WARN)
+      end
+  end, { desc = "启动 lazygit" })
 
   -- 代码操作建议
   vim.keymap.set("n", "<leader>ca", function()
