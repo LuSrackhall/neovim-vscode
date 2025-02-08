@@ -1,17 +1,7 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  keys = {
-    -- 移除默认的 <leader>e 绑定
-    -- { "<leader>e", false },
-    -- 添加 Ctrl-b 来切换侧边栏
-    {
-      "<C-b>",
-      function()
-        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
-      end,
-      desc = "切换文件浏览器",
-    },
-  },
+  -- 对于<C-b>的配置, 我们直接交由keymaps.lua文件, 在其中将其映射到<leader>e
+  -- 但仍需配置在目录中时, 用于关闭目录的命令。(否则在neovim中, 会发生使用<C-b>不会关闭目录窗口的bug)
   opts = {
     enable = true,
     window = {
