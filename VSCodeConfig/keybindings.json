@@ -14,5 +14,21 @@
     "args": "<C-c>"
   }
 
+  /* // 这个可以精确的实现类似neovim中 <leader>e 的功能, 但是其影响到了通过neovim的<leader>键, 为vscode映射按键的能力。
+  // 资源管理器聚焦快捷键
+  {
+    // 当侧边栏没有焦点时，按 Space+e 会打开并聚焦到资源管理器
+    "key": "space e",
+    "command": "workbench.view.explorer",
+    "when": "editorFocus && !terminalFindWidgetFocus && !searchInputBoxFocus && !inQuickOpen && !terminalFocus && !sideBarFocus && neovim.mode != 'insert'"
+  },
+  {
+    // 当侧边栏有焦点时，按 Space+e 会关闭侧边栏
+    "key": "space e",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "!debugConsoleInputFocus && !findInputFocussed && !terminalFindWidgetFocus && !searchInputBoxFocus && !inQuickOpen && !terminalFocus && sideBarFocus && neovim.mode != 'insert'"
+  } 
+  */
+
   ///////////////////////////       NeoVim区域  end       //////////////////////////////////////////////////////////////
 ]
