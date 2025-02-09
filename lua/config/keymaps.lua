@@ -303,6 +303,11 @@ local function setup_vscode_keymaps()
       -- 7. `size c,r`：启动终端时指定列数（c）和行数（r）。
       -- 8. `startingDirectory`, `-d`：指定启动目录。
       -- 9. `title`：指定新标签的标题。
+
+      -- 延时3秒后打开gitGraph插件的log面板
+      vim.defer_fn(function()
+        vscode.call("git-graph.view")
+      end, 3000) -- 3000毫秒 = 3秒
     elseif vim.fn.has("mac") == 1 then
       -- macOS 环境
       -- TODO: 设置 macOS 终端路径和命令
