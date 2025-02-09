@@ -445,10 +445,18 @@ vim.keymap.set({ "n", "v" }, "L", jump_to_next_tab, {
 --[[--------------------------------------------]]
 -- - -- ---------------------------------------- --  - --
 -- --[[  提供标签页移动功能:                      ]] -- --
--- --[[  * g;  - 移动标签页到右侧窗口            ]] -- --
--- --[[  * ;g  - 移动标签页到左侧窗口            ]] -- --
--- --[[  * t;  - 移动标签页到下侧窗口            ]] -- --
--- --[[  * ;t  - 移动标签页到上侧窗口            ]] -- --
+-- --[[  以下提供两组快捷键方案:                  ]] -- --
+-- --[[  1. 传统组合键方案:                       ]] -- --
+-- --[[     * g;  - 移动标签页到右侧窗口         ]] -- --
+-- --[[     * ;g  - 移动标签页到左侧窗口         ]] -- --
+-- --[[     * t;  - 移动标签页到下侧窗口         ]] -- --
+-- --[[     * ;t  - 移动标签页到上侧窗口         ]] -- --
+-- --[[  2. Leader键方案(更直观):                 ]] -- --
+-- --[[     * <leader>gl - 移动标签页到右侧窗口  ]] -- --
+-- --[[     * <leader>gh - 移动标签页到左侧窗口  ]] -- --
+-- --[[     * <leader>gj - 移动标签页到下侧窗口  ]] -- --
+-- --[[     * <leader>gk - 移动标签页到上侧窗口  ]] -- --
+-- - -- ---------------------------------------- --  - --
 -- - -- ---------------------------------------- --  - --
 
 -- 移动标签页到不同窗口的函数
@@ -496,6 +504,24 @@ vim.keymap.set("n", ";t", function() move_editor_to_group("above") end, {
   desc = "移动标签页到上侧窗口"
 })
 
+-- 新增 <leader> 组合键的标签页移动快捷键
+vim.keymap.set("n", "<leader>gl", function() move_editor_to_group("next") end, {
+  silent = true,
+  desc = "移动标签页到右侧窗口"
+})
+vim.keymap.set("n", "<leader>gh", function() move_editor_to_group("previous") end, {
+  silent = true,
+  desc = "移动标签页到左侧窗口"
+})
+vim.keymap.set("n", "<leader>gj", function() move_editor_to_group("below") end, {
+  silent = true,
+  desc = "移动标签页到下侧窗口"
+})
+vim.keymap.set("n", "<leader>gk", function() move_editor_to_group("above") end, {
+  silent = true,
+  desc = "移动标签页到上侧窗口"
+})
+
 --[[--------------------------------------------]]
 --[[             光标跳转功能                   ]]
 --[[--------------------------------------------]]
@@ -505,6 +531,11 @@ vim.keymap.set("n", ";t", function() move_editor_to_group("above") end, {
 -- --[[  * yg  - 移动光标到左侧窗口              ]] -- --
 -- --[[  * ty  - 移动光标到下侧窗口              ]] -- --
 -- --[[  * yt  - 移动光标到上侧窗口              ]] -- --
+-- --[[  /////////////////////////////////////// ]] -- --
+-- --[[  * <leader>wl - 移动光标到右侧窗口       ]] -- --
+-- --[[  * <leader>wh - 移动光标到左侧窗口       ]] -- --
+-- --[[  * <leader>wj - 移动光标到下侧窗口       ]] -- --
+-- --[[  * <leader>wk - 移动光标到上侧窗口       ]] -- --
 -- - -- ---------------------------------------- --  - --
 
 -- 移动光标到不同窗口的函数
@@ -548,6 +579,24 @@ vim.keymap.set("n", "ty", function() focus_group("below") end, {
   desc = "移动光标到下侧窗口"
 })
 vim.keymap.set("n", "yt", function() focus_group("above") end, {
+  silent = true,
+  desc = "移动光标到上侧窗口"
+})
+
+-- 新增 <leader>w 组合键的光标移动快捷键
+vim.keymap.set("n", "<leader>wl", function() focus_group("right") end, {
+  silent = true,
+  desc = "移动光标到右侧窗口"
+})
+vim.keymap.set("n", "<leader>wh", function() focus_group("left") end, {
+  silent = true,
+  desc = "移动光标到左侧窗口"
+})
+vim.keymap.set("n", "<leader>wj", function() focus_group("below") end, {
+  silent = true,
+  desc = "移动光标到下侧窗口"
+})
+vim.keymap.set("n", "<leader>wk", function() focus_group("above") end, {
   silent = true,
   desc = "移动光标到上侧窗口"
 })
