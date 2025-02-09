@@ -18,7 +18,7 @@ end
 vim.keymap.del("n", "<C-/>")
 
 -- 设置新的 <C-/> 映射，这是一个根据环境智能切换的映射
-vim.keymap.set({"n", "v"}, "<C-/>", function()
+vim.keymap.set({ "n", "v" }, "<C-/>", function()
   if is_vscode() then
     -- VSCode 环境：调用 VSCode 的注释命令
     local ok, vscode = pcall(require, "vscode")
@@ -33,7 +33,7 @@ vim.keymap.set({"n", "v"}, "<C-/>", function()
     vim.cmd("normal gcc")
   end
 end, {
-  silent = true, -- 执行时不显示命令
+  silent = true,           -- 执行时不显示命令
   desc = "Toggle Comment", -- 为这个映射添加描述
 })
 
@@ -51,11 +51,11 @@ vim.keymap.set({ "n", "v" }, "<C-_>", "gcc", {
 local function toggle_term()
   if is_vscode() then
     -- VSCode 环境：调用 VSCode 的终端切换命令
-    --[[ 
+    --[[
     -- 由于vscode的neovim插件仅在编辑器的命令模式起作用, 会造成在终端中无法切回关闭的问题, 因此必须在vscode中进行配置而不是这里。
     local ok, vscode = pcall(require, "vscode")
     if ok then
-      vscode.call("workbench.action.terminal.toggleTerminal") 
+      vscode.call("workbench.action.terminal.toggleTerminal")
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
@@ -113,7 +113,7 @@ local function map_terminal_keys()
     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --- -- -- --
     -- 本地leader键方案(新主力键)
     "<localleader>t", -- 本地leader键方案(新主力键)
-    "<F7>", -- 功能键替代方案
+    "<F7>",           -- 功能键替代方案
     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --- -- -- --
   }
 
@@ -185,8 +185,8 @@ local function clipboard_operation(operation)
     if operation == "copy" then
       -- 仅复制到系统剪贴板，不影响 vim 寄存器
       local old_reg = vim.fn.getreg('"') -- 保存当前寄存器内容
-      vim.cmd('normal! "+y') -- 复制到系统剪贴板
-      vim.fn.setreg('"', old_reg) -- 恢复寄存器内容
+      vim.cmd('normal! "+y')             -- 复制到系统剪贴板
+      vim.fn.setreg('"', old_reg)        -- 恢复寄存器内容
     elseif operation == "paste" then
       -- 仅从系统剪贴板粘贴，不影响 vim 寄存器
       vim.cmd('normal! "+p')
@@ -284,37 +284,36 @@ local function setup_vscode_keymaps()
 
   -- 切换源代码管理(在vscode中, 使用lazygit来切换源代码管理)
   vim.keymap.set("n", "<leader>gg", function()
-      -- 获取当前工作目录
-      local current_dir = vim.fn.getcwd()
+    -- 获取当前工作目录
+    local current_dir = vim.fn.getcwd()
 
-      -- 根据操作系统选择适当的终端和命令
-      if vim.fn.has("win32") == 1 then
-        -- Windows 环境使用 Windows Terminal
-        local terminal_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
-        -- 启动终端并运行 lazygit(通过-p参数指定wt使用 Git Bash, 需要注意的是-p后根的是wt中为某个shell配置的名称--这个名称取决与用户在终端中的自定义配置(比如我的是"Bash"))
-        vim.fn.system(string.format([[%s --pos 160,90 --fullscreen --window new -p "Bash" -d "%s" lazygit]], terminal_path, current_dir))
-        -- 1. `--fullscreen`：全屏模式启动，隐藏标题栏和边框
-        -- 2. `--maximized`/`-M`：最大化窗口启动
-        -- 3.  `--window new`: 在新的窗口中启动标签页。
-        -- 4. `-p "Bash"`: 指定使用要使用的配置文件名称。(即wt中对于shell的配置名称, 这里我尝试了, 不管使用哪个shell, 都存在使用退出时延迟一段时间后才关闭的情况)
-        -- 5. `focus`, `-f`：启动终端时进入焦点模式。
-        -- 6. `pos x,y`：启动终端时指定窗口位置，x 和 y 可选，可以使用默认值。
-        -- 7. `size c,r`：启动终端时指定列数（c）和行数（r）。
-        -- 8. `startingDirectory`, `-d`：指定启动目录。
-        -- 9. `title`：指定新标签的标题。
-
-
-      elseif vim.fn.has("mac") == 1 then
-        -- macOS 环境
-        -- TODO: 设置 macOS 终端路径和命令
-        vim.notify("macOS 环境暂未配置", vim.log.levels.WARN)
-      elseif vim.fn.has("unix") == 1 then
-        -- Linux 环境
-        -- TODO: 设置 Linux 终端路径和命令
-        vim.notify("Linux 环境暂未配置", vim.log.levels.WARN)
-      else
-        vim.notify("不支持的操作系统", vim.log.levels.WARN)
-      end
+    -- 根据操作系统选择适当的终端和命令
+    if vim.fn.has("win32") == 1 then
+      -- Windows 环境使用 Windows Terminal
+      local terminal_path = [[C:\Users\srackHall\AppData\Local\Microsoft\WindowsApps\wt.exe]]
+      -- 启动终端并运行 lazygit(通过-p参数指定wt使用 Git Bash, 需要注意的是-p后根的是wt中为某个shell配置的名称--这个名称取决与用户在终端中的自定义配置(比如我的是"Bash"))
+      vim.fn.system(string.format([[%s --pos 160,90 --fullscreen --window new -p "Bash" -d "%s" lazygit]], terminal_path,
+        current_dir))
+      -- 1. `--fullscreen`：全屏模式启动，隐藏标题栏和边框
+      -- 2. `--maximized`/`-M`：最大化窗口启动
+      -- 3.  `--window new`: 在新的窗口中启动标签页。
+      -- 4. `-p "Bash"`: 指定使用要使用的配置文件名称。(即wt中对于shell的配置名称, 这里我尝试了, 不管使用哪个shell, 都存在使用退出时延迟一段时间后才关闭的情况)
+      -- 5. `focus`, `-f`：启动终端时进入焦点模式。
+      -- 6. `pos x,y`：启动终端时指定窗口位置，x 和 y 可选，可以使用默认值。
+      -- 7. `size c,r`：启动终端时指定列数（c）和行数（r）。
+      -- 8. `startingDirectory`, `-d`：指定启动目录。
+      -- 9. `title`：指定新标签的标题。
+    elseif vim.fn.has("mac") == 1 then
+      -- macOS 环境
+      -- TODO: 设置 macOS 终端路径和命令
+      vim.notify("macOS 环境暂未配置", vim.log.levels.WARN)
+    elseif vim.fn.has("unix") == 1 then
+      -- Linux 环境
+      -- TODO: 设置 Linux 终端路径和命令
+      vim.notify("Linux 环境暂未配置", vim.log.levels.WARN)
+    else
+      vim.notify("不支持的操作系统", vim.log.levels.WARN)
+    end
   end, { desc = "启动 lazygit" })
 
   -- 代码操作建议
