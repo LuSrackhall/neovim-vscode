@@ -435,3 +435,246 @@ vim.keymap.set({ "n", "v" }, "L", jump_to_next_tab, {
 -- --[[  * 为NeoVim配置                          ]] -- --
 -- --[[  * 为NeoVim配置                          ]] -- --
 -- - -- ---------------------------------------- -- - --
+
+--[[--------------------------------------------]]
+--[[             移动标签页功能                 ]]
+--[[--------------------------------------------]]
+-- - -- ---------------------------------------- --  - --
+-- --[[  提供标签页移动功能:                      ]] -- --
+-- --[[  * g;  - 移动标签页到右侧窗口            ]] -- --
+-- --[[  * ;g  - 移动标签页到左侧窗口            ]] -- --
+-- --[[  * t;  - 移动标签页到下侧窗口            ]] -- --
+-- --[[  * ;t  - 移动标签页到上侧窗口            ]] -- --
+-- - -- ---------------------------------------- --  - --
+
+-- 移动标签页到不同窗口的函数
+function move_editor_to_group(direction)
+  -- 环境智能适配:
+  -- * VSCode环境  - 使用VSCode的窗口移动命令
+  -- * Neovim环境  - 暂时不支持
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的窗口移动命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      if direction == "next" then
+        vscode.call("workbench.action.moveEditorToNextGroup")
+      elseif direction == "previous" then
+        vscode.call("workbench.action.moveEditorToPreviousGroup")
+      elseif direction == "below" then
+        vscode.call("workbench.action.moveEditorToBelowGroup")
+      elseif direction == "above" then
+        vscode.call("workbench.action.moveEditorToAboveGroup")
+      end
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 纯 Neovim 环境：暂不支持
+    vim.notify("Neovim 环境暂不支持此功能", vim.log.levels.WARN)
+  end
+end
+
+-- 设置标签页移动快捷键
+vim.keymap.set("n", "g;", function() move_editor_to_group("next") end, {
+  silent = true,
+  desc = "移动标签页到右侧窗口"
+})
+vim.keymap.set("n", ";g", function() move_editor_to_group("previous") end, {
+  silent = true,
+  desc = "移动标签页到左侧窗口"
+})
+vim.keymap.set("n", "t;", function() move_editor_to_group("below") end, {
+  silent = true,
+  desc = "移动标签页到下侧窗口"
+})
+vim.keymap.set("n", ";t", function() move_editor_to_group("above") end, {
+  silent = true,
+  desc = "移动标签页到上侧窗口"
+})
+
+--[[--------------------------------------------]]
+--[[             光标跳转功能                   ]]
+--[[--------------------------------------------]]
+-- - -- ---------------------------------------- --  - --
+-- --[[  提供光标在窗口间移动功能:                ]] -- --
+-- --[[  * gy  - 移动光标到右侧窗口              ]] -- --
+-- --[[  * yg  - 移动光标到左侧窗口              ]] -- --
+-- --[[  * ty  - 移动光标到下侧窗口              ]] -- --
+-- --[[  * yt  - 移动光标到上侧窗口              ]] -- --
+-- - -- ---------------------------------------- --  - --
+
+-- 移动光标到不同窗口的函数
+function focus_group(direction)
+  -- 环境智能适配:
+  -- * VSCode环境  - 使用VSCode的窗口聚焦命令
+  -- * Neovim环境  - 暂时不支持
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的窗口聚焦命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      if direction == "right" then
+        vscode.call("workbench.action.focusRightGroup")
+      elseif direction == "left" then
+        vscode.call("workbench.action.focusLeftGroup")
+      elseif direction == "below" then
+        vscode.call("workbench.action.focusBelowGroup")
+      elseif direction == "above" then
+        vscode.call("workbench.action.focusAboveGroup")
+      end
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 纯 Neovim 环境：暂不支持
+    vim.notify("Neovim 环境暂不支持此功能", vim.log.levels.WARN)
+  end
+end
+
+-- 设置光标移动快捷键
+vim.keymap.set("n", "gy", function() focus_group("right") end, {
+  silent = true,
+  desc = "移动光标到右侧窗口"
+})
+vim.keymap.set("n", "yg", function() focus_group("left") end, {
+  silent = true,
+  desc = "移动光标到左侧窗口"
+})
+vim.keymap.set("n", "ty", function() focus_group("below") end, {
+  silent = true,
+  desc = "移动光标到下侧窗口"
+})
+vim.keymap.set("n", "yt", function() focus_group("above") end, {
+  silent = true,
+  desc = "移动光标到上侧窗口"
+})
+
+--[[--------------------------------------------]]
+--[[             代码功能增强                   ]]
+--[[--------------------------------------------]]
+-- - -- ---------------------------------------- --  - --
+-- --[[  提供代码功能增强:                        ]] -- --
+-- --[[  * ge - 跳转到下一个问题                  ]] -- --
+-- --[[  * gl - 切换代码折叠                      ]] -- --
+-- --[[  * gh - 显示定义预览                      ]] -- --
+-- --[[  * mgn - 查看下一个代码差异               ]] -- --    --FIXME: 无法聚焦到对应窗口
+-- --[[  * mgp - 查看上一个代码差异               ]] -- --    --FIXME: 无法聚焦到对应窗口
+-- --[[  * mgm - 打开上下文菜单                   ]] -- --    --FIXME: 无法聚焦到对应窗口
+-- - -- ---------------------------------------- --  - --
+
+-- 代码增强函数
+function code_action(action)
+  -- 环境智能适配:
+  -- * VSCode环境  - 使用VSCode的代码功能命令
+  -- * Neovim环境  - 暂时不支持
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的代码功能命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      if action == "next_problem" then
+        vscode.call("editor.action.marker.next")
+      elseif action == "toggle_fold" then
+        vscode.call("editor.toggleFold")
+      elseif action == "show_hover" then
+        vscode.call("editor.action.showDefinitionPreviewHover")
+      elseif action == "next_change" then
+        vscode.call("editor.action.dirtydiff.next")
+      elseif action == "prev_change" then
+        vscode.call("editor.action.dirtydiff.previous")
+      elseif action == "context_menu" then
+        vscode.call("editor.action.showContextMenu")
+      end
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 纯 Neovim 环境：暂不支持
+    vim.notify("Neovim 环境暂不支持此功能", vim.log.levels.WARN)
+  end
+end
+
+-- 设置代码功能快捷键
+local code_mappings = {
+  -- 普通模式下的映射
+  normal = {
+    -- 跳转到下一个问题
+    ["ge"] = { action = "next_problem", desc = "跳转到下一个问题" },
+    -- 切换代码折叠
+    ["gl"] = { action = "toggle_fold", desc = "切换代码折叠" },
+    -- 显示定义预览
+    ["gh"] = { action = "show_hover", desc = "显示定义预览" },
+    -- 查看下一个代码差异
+    ["mgn"] = { action = "next_change", desc = "查看下一个代码差异" },
+    -- 查看上一个代码差异
+    ["mgp"] = { action = "prev_change", desc = "查看上一个代码差异" },
+    -- 打开上下文菜单
+    ["mgm"] = { action = "context_menu", desc = "打开上下文菜单" }
+  },
+  -- 可视模式下的映射
+  visual = {
+    -- 显示定义预览
+    ["gh"] = { action = "show_hover", desc = "显示定义预览" },
+    -- 打开上下文菜单
+    ["mgm"] = { action = "context_menu", desc = "打开上下文菜单" }
+  }
+}
+
+-- 应用映射
+for mode, mappings in pairs(code_mappings) do
+  for key, mapping in pairs(mappings) do
+    vim.keymap.set(mode == "normal" and "n" or "v", key, function()
+      code_action(mapping.action)
+    end, {
+      silent = true,
+      desc = mapping.desc
+    })
+  end
+end
+
+--[[--------------------------------------------]]
+--[[             Git 功能增强                   ]]
+--[[--------------------------------------------]]
+-- - -- ---------------------------------------- --  - --
+-- --[[  提供可视模式下的 Git 功能:               ]] -- --
+-- --[[  * mgs - 暂存所选范围                     ]] -- --
+-- --[[  * mgc - 取消暂存所选范围                 ]] -- --
+-- --[[  * mgd - 还原所选范围变更                 ]] -- --
+-- - -- ---------------------------------------- --  - --
+
+-- Git 操作函数
+function git_action(action)
+  -- 环境智能适配:
+  -- * VSCode环境  - 使用VSCode的Git命令
+  -- * Neovim环境  - 暂时不支持
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的Git命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      if action == "stage" then
+        vscode.call("git.stageSelectedRanges")
+      elseif action == "unstage" then
+        vscode.call("git.unstageSelectedRanges")
+      elseif action == "revert" then
+        vscode.call("git.revertSelectedRanges")
+      end
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 纯 Neovim 环境：暂不支持
+    vim.notify("Neovim 环境暂不支持此功能", vim.log.levels.WARN)
+  end
+end
+
+-- 设置可视模式下的Git快捷键
+vim.keymap.set("v", "mgs", function() git_action("stage") end, {
+  silent = true,
+  desc = "暂存所选范围"
+})
+vim.keymap.set("v", "mgc", function() git_action("unstage") end, {
+  silent = true,
+  desc = "取消暂存所选范围"
+})
+vim.keymap.set("v", "mgd", function() git_action("revert") end, {
+  silent = true,
+  desc = "还原所选范围变更"
+})
