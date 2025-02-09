@@ -334,3 +334,88 @@ vim.keymap.set("n", "<C-b>", "<leader>e", {
   remap = true,
   desc = "切换文件浏览器",
 })
+
+
+--[[--------------------------------------------]]
+--[[                标签页跳转                  ]]
+--[[--------------------------------------------]]
+-- - -- ---------------------------------------- --  - --
+-- --[[  提供标签页快捷切换功能:                  ]] -- --
+-- --[[  * tg  - 跳转到上一个标签页（自定义按键） ]] -- --
+-- --[[  * H   - 跳转到上一个标签页（vim原生按键）]] -- --
+-- --[[  * gT  - 跳转到上一个标签页（vim原生按键）]] -- --
+-- --[[  /////////////////////////////////////// ]] -- --
+-- --[[  * gt  - 跳转到下一个标签页（vim原生按键）]] -- --
+-- --[[  * L   - 跳转到下一个标签页（vim原生按键）]] -- --
+-- - -- ---------------------------------------- --  - --
+
+-- -- 删除 LazyVim 默认的 快捷键映射 (如果有必要的话), 比如:
+-- -- * p1-< 你要使用的快捷键在LazyVim中已经被其它功能占用了>
+-- -- * p2-< 你要使用的功能在LazyVim中有其它的快捷键映射, 但你不需要>
+-- vim.keymap.del("n", "tg")  -- 满足 p1 条件
+-- vim.keymap.del("n", "H")   -- 满足 p2 条件
+
+-- 标签跳转函数(上一页)
+function jump_to_previous_tab()
+  -- 环境智能适配:
+  -- * VSCode环境  - 使用VSCode的标签切换命令
+  -- * Neovim环境  - 使用BufferLine的标签切换命令
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的标签页切换命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      vscode.call("workbench.action.previousEditor")
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 纯 Neovim 环境：使用标签页切换命令
+    vim.cmd("BufferLineCyclePrev")
+  end
+end
+
+-- --  使用 'tg' 键跳转到上一个标签页
+vim.keymap.set({ "n", "v" }, "tg", jump_to_previous_tab, {
+  silent = true, -- 执行时不显示命令
+  desc = "跳转到上一个标签页" -- 为这个映射添加描述
+})
+-- --  使用 'H' 键跳转到上一个标签页（vim原生按键）
+vim.keymap.set({ "n", "v" }, "H", jump_to_previous_tab, {
+  silent = true, -- 执行时不显示命令
+  desc = "跳转到上一个标签页" -- 为这个映射添加描述
+})
+-- --  使用 'gT' 键跳转到上一个标签页（vim原生按键）
+vim.keymap.set({ "n", "v" }, "gT", jump_to_previous_tab, {
+  silent = true, -- 执行时不显示命令
+  desc = "跳转到上一个标签页" -- 为这个映射添加描述
+})
+
+-- 标签跳转函数(下一页)
+function jump_to_next_tab()
+  -- 环境智能适配:
+  -- * VSCode环境  - 使用VSCode的标签切换命令
+  -- * Neovim环境  - 使用BufferLine的标签切换命令
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的标签页切换命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      vscode.call("workbench.action.nextEditor")
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 纯 Neovim 环境：使用标签页切换命令
+    vim.cmd("BufferLineCycleNext")
+  end
+end
+
+-- --  使用 'gt' 键跳转到下一个标签页（vim原生按键）
+vim.keymap.set({ "n", "v" }, "gt", jump_to_next_tab, {
+  silent = true, -- 执行时不显示命令
+  desc = "跳转到下一个标签页" -- 为这个映射添加描述
+})
+-- --  使用 'L' 键跳转到下一个标签页（vim原生按键）
+vim.keymap.set({ "n", "v" }, "L", jump_to_next_tab, {
+  silent = true, -- 执行时不显示命令
+  desc = "跳转到下一个标签页" -- 为这个映射添加描述
+})
