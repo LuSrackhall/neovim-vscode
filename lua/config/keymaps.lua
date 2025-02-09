@@ -18,7 +18,7 @@ end
 vim.keymap.del("n", "<C-/>")
 
 -- 设置新的 <C-/> 映射，这是一个根据环境智能切换的映射
-vim.keymap.set("n", "<C-/>", function()
+vim.keymap.set({"n", "v"}, "<C-/>", function()
   if is_vscode() then
     -- VSCode 环境：调用 VSCode 的注释命令
     local ok, vscode = pcall(require, "vscode")
