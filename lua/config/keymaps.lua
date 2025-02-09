@@ -363,7 +363,10 @@ function jump_to_previous_tab()
     -- VSCode 环境：调用 VSCode 的标签页切换命令
     local ok, vscode = pcall(require, "vscode")
     if ok then
-      vscode.call("workbench.action.previousEditor")
+      -- [官方文档中提到的这些, 也可以用](https://github.com/vscode-neovim/vscode-neovim?text=%2C%20etc.-,Tab%20management,%2C%20etc.,-Buffer/window%20management#:~:text=%2C%20etc.-,Tab%20management,%2C%20etc.,-Buffer/window%20management
+      -- 我这里遵循的是: vscode的配置, 只要vscode本身有提供就优先使用的原则。
+      -- vscode.call("workbench.action.previousEditor")
+      vscode.call("workbench.action.previousEditorInGroup")
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
@@ -398,7 +401,8 @@ function jump_to_next_tab()
     -- VSCode 环境：调用 VSCode 的标签页切换命令
     local ok, vscode = pcall(require, "vscode")
     if ok then
-      vscode.call("workbench.action.nextEditor")
+      -- vscode.call("workbench.action.nextEditor")
+      vscode.call("workbench.action.nextEditorInGroup")
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
