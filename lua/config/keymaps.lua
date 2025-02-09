@@ -138,6 +138,77 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+--[[--------------------------------------------]]
+--[[             撤销重做功能                   ]]
+--[[--------------------------------------------]]
+-- - -- ---------------------------------------- --  - --
+-- --[[  提供撤销和重做功能:                      ]] -- --
+-- --[[  * Ctrl+z     - 撤销                      ]] -- --
+-- --[[  * Ctrl+S+z   - 重做                      ]] -- --
+-- --[[  * u          - 撤销(vim原生)             ]] -- --
+-- --[[  * U          - 重做(vim原生)             ]] -- --
+-- - -- ---------------------------------------- --  - --
+
+-- 撤销重做函数
+local function undo_redo_action(action)
+  if is_vscode() then
+    -- VSCode 环境：调用 VSCode 的撤销重做命令
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      if action == "undo" then
+        vscode.call("undo")
+      elseif action == "redo" then
+        vscode.call("redo")
+      end
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- Neovim 环境：使用vim的撤销重做命令
+    if action == "undo" then
+      vim.cmd("undo")
+    elseif action == "redo" then
+      vim.cmd("redo")
+    end
+  end
+end
+
+-- 设置撤销重做快捷键
+local undo_redo_mappings = {
+  -- Ctrl系列快捷键 (VSCode风格)
+  ["<C-z>"] = {
+    mode = { "n", "i" },
+    action = "undo",
+    desc = "撤销"
+  },
+  ["<C-S-z>"] = {
+    mode = { "n", "i" },
+    action = "redo",
+    desc = "重做"
+  },
+}
+
+-- 应用Ctrl系列映射
+for key, mapping in pairs(undo_redo_mappings) do
+  vim.keymap.set(mapping.mode, key, function()
+    undo_redo_action(mapping.action)
+  end, {
+    silent = true,
+    desc = mapping.desc
+  })
+end
+
+-- 设置vim原生的u/U映射
+-- 注意：这些映射使用vim的内置撤销系统，与Ctrl系列独立
+vim.keymap.set("n", "u", "u", {
+  silent = true,
+  desc = "Vim式撤销"
+})
+vim.keymap.set("n", "U", "<C-r>", {
+  silent = true,
+  desc = "Vim式重做"
+})
+
 --[[---------------------------------------]]
 --[[            剪贴板功能                 ]]
 --[[---------------------------------------]]
