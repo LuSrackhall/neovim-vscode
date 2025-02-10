@@ -3,9 +3,11 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = false,
     priority = 1000,
     opts = {
-      transparent_background = true, -- 启用透明背景
+      flavour = "mocha",
+      transparent_background = true, -- 启用透明背景(否则只有亚克力效果, 我们需要透明背景将其变为毛玻璃)
       styles = {
         comments = { "italic" },
         conditionals = { "italic" },
@@ -21,6 +23,10 @@ return {
         operators = {},
       },
     },
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin-mocha")
+    end,
   },
   
   -- 光标增强
@@ -99,3 +105,34 @@ return {
     end,
   },
 }
+
+-- LazyVim中切换主题很简单，使用:colorscheme命令：
+
+-- 查看所有可用主题：
+-- * :colorscheme 然后先按 空格 再按 Tab 键，会显示所有已安装的主题
+
+-- 切换到特定主题：
+
+-- :colorscheme tokyonight - 切换到 Tokyo Night（默认主题）
+-- :colorscheme catppuccin - 切换到 Catppuccin ()
+-- :colorscheme habamax - 切换到 Habamax
+-- 主题变体：
+-- Tokyo Night 变体：
+
+-- :colorscheme tokyonight-night - 深色版本
+-- :colorscheme tokyonight-storm - 稍微亮一点的深色
+-- :colorscheme tokyonight-day - 浅色版本
+-- :colorscheme tokyonight-moon - 高对比度版本
+-- Catppuccin 变体：
+
+-- :colorscheme catppuccin-mocha - 深色版本
+-- :colorscheme catppuccin-macchiato - 中等深色
+-- :colorscheme catppuccin-frappe - 柔和深色
+-- :colorscheme catppuccin-latte - 浅色版本
+--
+-- 如果你想将某个主题设为默认，可以在 lua/config/options.lua 中添加：
+--
+-- vim.cmd.colorscheme "catppuccin"  -- 或其他主题名
+-- vim.cmd.colorscheme("catppuccin") -- lua 中的调用方式
+--
+-- 如果你和我一样, 在lua/config/options.lua 使用代码后没有生效, 则可参考本次提交中我的做法, 直接在主题插件的配置文件内, 定义默认主题(ai帮忙搞的哈哈)。
