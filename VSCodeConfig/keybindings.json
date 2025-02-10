@@ -12,6 +12,13 @@
     "when": "editorTextFocus && neovim.mode != 'normal'",
     // Send this input to Neovim.
     "args": "<C-c>"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "vscode-neovim.send",
+    "when": "editorTextFocus",
+    // Send this input to Neovim.
+    "args": "<C-f>"
   }
 
   /* // 这个可以精确的实现类似neovim中 <leader>e 的功能, 但是其影响到了通过neovim的<leader>键, 为vscode映射按键的能力。

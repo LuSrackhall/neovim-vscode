@@ -139,6 +139,24 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 --[[--------------------------------------------]]
+-- Enable VSCode's built-in search functionality in normal, visual, and insert modes
+vim.keymap.set({ "n", "v", "i" }, "<C-f>", function()
+  if is_vscode() then
+    local ok, vscode = pcall(require, "vscode")
+    if ok then
+      vscode.call("actions.find")
+    else
+      vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    end
+  else
+    -- 在neovim中, 采用默认行为。
+    -- vim.cmd("normal /")
+  end
+end, {
+  silent = true,
+  desc = "VSCode Search",
+})
+
 --[[             撤销重做功能                   ]]
 --[[--------------------------------------------]]
 -- FIXME: VSCode中莫名奇妙符合了需求, 但配置内容实际上不一定正确, 且NeoVim端存在bug。(但由于我个人对于NeoVim用的少, 因此只要vscode能用不出bug, 就可以了。 如果一直没问题, 那么这个Fix将被永远挂起。))
