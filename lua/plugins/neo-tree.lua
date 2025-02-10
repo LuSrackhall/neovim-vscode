@@ -31,12 +31,15 @@ return {
       enable_diagnostics = true,
       sources = {
         "filesystem",
-        "buffers",
         "git_status",
       },
       source_selector = {
         winbar = true,
         content_layout = "center",
+        sources = {
+          { source = "filesystem", display_name = " 文件" },
+          { source = "git_status", display_name = " Git" },
+        },
       },
       -- Session持久化配置
       use_session_persistence = true,
