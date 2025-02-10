@@ -24,6 +24,11 @@ return {
     },
   },
   config = function(_, opts)
+    -- 设置自定义高亮组
+    vim.api.nvim_set_hl(0, "NeoTreeTabInactive", { bold = false })
+    vim.api.nvim_set_hl(0, "NeoTreeTabActive", { bold = true })
+    vim.api.nvim_set_hl(0, "NeoTreeTabSeparator", {})
+
     -- 确保neo-tree配置在session之前完成初始化
     require("neo-tree").setup(vim.tbl_deep_extend("force", {
       close_if_last_window = true,
@@ -36,6 +41,14 @@ return {
       source_selector = {
         winbar = true,
         content_layout = "center",
+        separator = "", -- 移除分隔符
+        separator_active = "", -- 移除活动状态的分隔符
+        show_separator_on_edge = false,
+        highlight_tab = "NeoTreeTabInactive",
+        highlight_tab_active = "NeoTreeTabActive",
+        highlight_background = "NeoTreeTabInactive",
+        highlight_separator = "NeoTreeTabSeparator",
+        highlight_separator_active = "NeoTreeTabSeparator",
         sources = {
           { source = "filesystem", display_name = " 文件" },
           { source = "git_status", display_name = " Git" },
