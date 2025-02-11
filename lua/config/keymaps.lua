@@ -9,7 +9,13 @@
 local function is_vscode()
   return vim.g.vscode ~= nil -- 如果 vim.g.vscode 不为 nil，则表示在 VSCode 中运行
 end
-
+local function vscode_notify(msg, sustainTime)
+  vim.notify(msg, vim.log.levels.DEBUG)
+  vim.defer_fn(function()
+    -- 500ms后清空通知栏
+    vim.notify(" ", vim.log.levels.DEBUG)
+  end, sustainTime)
+end
 --[[---------------------------------------]]
 --[[            代码注释功能               ]]
 --[[---------------------------------------]]
@@ -24,6 +30,8 @@ vim.keymap.set({ "n", "v" }, "<C-/>", function()
     local ok, vscode = pcall(require, "vscode")
     if ok then
       vscode.call("editor.action.commentLine")
+      vscode_notify("执行vscode代码注释/取消注释操作", 500)
+
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
     end
@@ -259,7 +267,7 @@ local function clipboard_operation(operation)
         vscode.call("editor.action.clipboardCopyAction")
         vscode.call("vscode-neovim.escape")
         -- 向vscode-neovim插件发送调试信息
-        vim.notify("执行vscode复制操作", vim.log.levels.DEBUG)
+        vscode_notify("执行vscode复制操作", 500)
         -- 剪切操作已注释，因为使用频率极低(且VSCodeVim这个插件也没有配置这个快捷键)(最重要的是在V模式下使用此api时, 有机率发生整行都被剪切掉的现象, 无法保证一直都是仅剪切选中内容。)
         -- elseif operation == "cut" then
         -- vscode.call("editor.action.clipboardCutAction")
