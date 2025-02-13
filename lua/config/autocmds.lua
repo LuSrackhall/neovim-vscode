@@ -1,66 +1,46 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
--- Add any additional autocmds here
+-- ...existing code...
 
--- 注册颜色主题到补全系统
-local color_list = vim.fn.getcompletion("", "color")
-if not vim.tbl_contains(color_list, "neon") then
-  vim.api.nvim_create_autocmd("ColorSchemePre", {
-    pattern = "*",
-    callback = function()
-      vim.fn.execute("silent! packadd neon")
-    end,
-  })
-end
-
-if not vim.tbl_contains(color_list, "catppuccin") then
-  vim.api.nvim_create_autocmd("ColorSchemePre", {
-    pattern = "*",
-    callback = function()
-      vim.fn.execute("silent! packadd catppuccin")
-    end,
-  })
-end
-
--- 创建用于补全的命令
-vim.api.nvim_create_user_command("Colors", function()
-  local colors = vim.fn.getcompletion("", "color")
-  vim.ui.select(colors, {
-    prompt = "Select colorscheme:",
-    format_item = function(item)
-      return item
-    end,
-  }, function(choice)
-    if choice then
-      vim.cmd.colorscheme(choice)
+-- 禁止创建空白缓冲区，改为显示启动页面
+do
+  local function show_startpage()
+    -- 尝试显示 Alpha 或 Dashboard 主页
+    if vim.fn.exists(':Alpha') == 2 then
+      vim.cmd('Alpha')
+    elseif vim.fn.exists(':Dashboard') == 2 then
+      vim.cmd('Dashboard')
+    else
+      -- 如果都没有，至少显示 Lazy
+      pcall(vim.cmd, 'Lazy')
     end
-  end)
-end, {})
-
--- 添加切换 colorcolumn 的功能
-vim.api.nvim_create_user_command("ToggleColorColumn", function()
-  if vim.wo.colorcolumn == "" then
-    vim.wo.colorcolumn = "80"
-  else
-    vim.wo.colorcolumn = ""
   end
-end, {})
 
--- 使用更强制的方式禁用 colorcolumn
-vim.api.nvim_create_autocmd({ "VimEnter", "WinNew", "BufWinEnter", "FileType" }, {
-  pattern = "*",
-  callback = function()
-    vim.wo.colorcolumn = ""
-  end,
-})
+  vim.api.nvim_create_autocmd({"BufNewFile", "BufWinEnter", "BufDelete"}, {
+    group = vim.api.nvim_create_augroup("NoEmptyBuffer", { clear = true }),
+    callback = function(event)
+      local bufname = vim.api.nvim_buf_get_name(event.buf)
+      local buftype = vim.bo[event.buf].buftype
+      local filetype = vim.bo[event.buf].filetype
+      
+      -- 处理空白缓冲区
+      if bufname == "" and buftype == "" and filetype == "" then
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(event.buf) then
+            -- 确保不会创建新的空白缓冲区
+            if #vim.fn.getbufinfo({buflisted = 1}) <= 1 then
+              show_startpage()
+            end
+            -- 删除原空白缓冲区
+            pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+          end
+        end)
+      end
 
--- 始终显示标签栏
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.opt.showtabline = 2
-    -- 确保标签栏样式设置正确
-    if vim.g.tabline_show_bufnr == nil then
-      vim.g.tabline_show_bufnr = 1
-    end
-  end,
-})
+      -- 检查是否所有标签页都被关闭
+      if #vim.fn.getbufinfo({buflisted = 1}) == 0 then
+        vim.schedule(show_startpage)
+      end
+    end,
+  })
+end
+
+-- ...existing code...
