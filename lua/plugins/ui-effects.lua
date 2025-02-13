@@ -71,47 +71,47 @@ return {
   -- indent-blankline：优化的缩进线
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
-    opts = {
-      indent = {
-        char = "│",      -- 使用制表符样式的竖线
-        highlight = {     -- 使用渐变色的缩进线
-          "GlowIndent1", -- 第一级缩进颜色
-          "GlowIndent2", -- 第二级缩进颜色
-        },
-      },
-      scope = {          -- 代码块范围显示
-        enabled = true,
-        char = "│",      -- 范围指示线样式
-        show_start = false,  -- 不显示开始标记
-        show_end = false,    -- 不显示结束标记
-        highlight = "GlowScope", -- 范围指示线的高亮组
-      },
-    },
-    config = function(_, opts)
-      -- 渐变色配置
-      local colors = {
-        "#7aa2f7",  -- 蓝色：用于浅层缩进
-        "#bb9af7",  -- 紫色：用于深层缩进
-      }
-      
-      -- 设置缩进线的高亮颜色
-      for i, color in ipairs(colors) do
-        vim.api.nvim_set_hl(0, "GlowIndent" .. i, {
-          fg = color,           -- 前景色
-          nocombine = true,     -- 防止与其他高亮冲突
-        })
+    config = function()
+      -- 创建高亮配置函数
+      local function set_ibl_highlights()
+        -- 缩进线颜色
+        vim.api.nvim_set_hl(0, "GlowIndent1", { fg = "#7aa2f7", nocombine = true })
+        vim.api.nvim_set_hl(0, "GlowIndent2", { fg = "#bb9af7", nocombine = true })
+        -- 范围指示线颜色
+        vim.api.nvim_set_hl(0, "GlowScope", { fg = "#7dcfff", nocombine = true })
       end
-      
-      -- 设置代码块范围线的高亮
-      vim.api.nvim_set_hl(0, "GlowScope", {
-        fg = "#7dcfff",    -- 使用亮蓝色突出显示
-        bold = true,       -- 加粗显示
-        nocombine = true,  -- 防止与其他高亮冲突
+
+      -- 初始设置高亮
+      set_ibl_highlights()
+
+      -- 在主题改变时重新设置高亮
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          set_ibl_highlights()
+        end,
       })
-      
-      require("ibl").setup(opts)
+
+      -- 基础配置
+      local config = {
+        enabled = true,
+        indent = {
+          char = "│",
+          highlight = { "GlowIndent1", "GlowIndent2" },
+        },
+        scope = {
+          enabled = true,
+          char = "│",
+          show_start = false,
+          show_end = false,
+          highlight = "GlowScope",
+          priority = 500,
+        },
+      }
+
+      -- 初始化插件
+      require("ibl").setup(config)
     end,
   },
 
