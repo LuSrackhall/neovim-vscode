@@ -34,7 +34,8 @@ return {
         intervals = 35,        -- 刷新间隔 (更小 = 更流畅，但更耗性能)
         priority = 10,         -- 渲染优先级
         timeout = 3000,        -- 超时时间，设置较大值使拖尾持久
-        threshold = 3,         -- 位移阈值，小于此值不触发动画
+        threshold = 0,         -- 设置触发动画的最小行数为1
+        enabled = true,
         
         disabled_filetypes = { -- 在这些文件类型中禁用
           "lazy",
