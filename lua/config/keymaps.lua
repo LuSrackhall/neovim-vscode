@@ -837,3 +837,15 @@ vim.keymap.set("v", "mgd", function() git_action("revert") end, {
   silent = true,
   desc = "还原所选范围变更"
 })
+
+-- 添加切换光标列显示的功能
+local function toggle_cursor_column()
+  -- 切换 cursorcolumn 选项
+  vim.wo.cursorcolumn = not vim.wo.cursorcolumn
+end
+
+-- 使用 <leader>tc 来切换光标列显示
+vim.keymap.set('n', '<leader>tc', toggle_cursor_column, {
+  silent = true,
+  desc = '切换光标列显示'
+})

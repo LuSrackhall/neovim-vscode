@@ -36,3 +36,20 @@ vim.api.nvim_create_user_command("Colors", function()
     end
   end)
 end, {})
+
+-- 添加切换 colorcolumn 的功能
+vim.api.nvim_create_user_command("ToggleColorColumn", function()
+  if vim.wo.colorcolumn == "" then
+    vim.wo.colorcolumn = "80"
+  else
+    vim.wo.colorcolumn = ""
+  end
+end, {})
+
+-- 使用更强制的方式禁用 colorcolumn
+vim.api.nvim_create_autocmd({ "VimEnter", "WinNew", "BufWinEnter", "FileType" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.colorcolumn = ""
+  end,
+})
