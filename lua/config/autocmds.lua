@@ -53,3 +53,14 @@ vim.api.nvim_create_autocmd({ "VimEnter", "WinNew", "BufWinEnter", "FileType" },
     vim.wo.colorcolumn = ""
   end,
 })
+
+-- 始终显示标签栏
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.opt.showtabline = 2
+    -- 确保标签栏样式设置正确
+    if vim.g.tabline_show_bufnr == nil then
+      vim.g.tabline_show_bufnr = 1
+    end
+  end,
+})

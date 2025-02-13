@@ -148,4 +148,14 @@ return {
       end
     end,
   },
+
+  -- bufferline.nvim：优化的标签栏
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        always_show_bufferline = true, -- 这个选项控制是否始终显示标签栏
+      },
+    },
+  },
 }
