@@ -426,6 +426,11 @@ local function setup_vscode_keymaps()
   vim.keymap.set("n", "<leader>ca", function()
     vscode.call("editor.action.quickFix")
   end, { desc = "代码操作建议" })
+
+  -- 关闭当前标签页
+  vim.keymap.set("n", "<leader>bd", function()
+    vscode.call("workbench.action.closeActiveEditor")
+  end, { desc = "关闭当前标签页" })
 end
 
 -- 调用设置函数
@@ -849,3 +854,12 @@ vim.keymap.set('n', '<leader>tc', toggle_cursor_column, {
   silent = true,
   desc = '切换光标列显示'
 })
+
+-- 在 Neovim 环境下，将 <C-w><C-w> 映射到 <leader>bd
+if not is_vscode() then
+  vim.keymap.set('n', '<C-w><C-w>', '<leader>bd', {
+    silent = true,
+    remap = true,
+    desc = '关闭当前标签页'
+  })
+end
