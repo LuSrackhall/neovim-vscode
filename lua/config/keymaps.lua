@@ -843,6 +843,10 @@ vim.keymap.set("v", "mgd", function() git_action("revert") end, {
   desc = "还原所选范围变更"
 })
 
+--[[----------------------------------------------------]]
+--[[                        杂项                        ]]
+--[[----------------------------------------------------]]
+
 -- 添加切换光标列显示的功能
 local function toggle_cursor_column()
   -- 切换 cursorcolumn 选项
