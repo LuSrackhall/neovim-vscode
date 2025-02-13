@@ -4,22 +4,24 @@ return {
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
     local logo = [[
-      ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗
-      ██║     ██╔══██╗██╔════╝██║   ██║██║   ██║██║████╗ ████║
-      ██║     ███████║███████╗██║   ██║██║   ██║██║██╔████╔██║
-      ██║     ██╔══██║╚════██║██║   ██║██║   ██║██║██║╚██╔╝██║
-      ███████╗██║  ██║███████║╚██████╔╝╚██████╔╝██║██║ ╚═╝ ██║
-      ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝     ╚═╝
+        ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
+        ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
+        ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
+        ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
+        ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           
+        ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
     ]]
     dashboard.section.header.val = vim.split(logo, "\n")
     dashboard.section.buttons.val = {
-      dashboard.button("f", "󰈞 文件", ":Telescope find_files <CR>"),
-      dashboard.button("n", "󰈔 新建", ":ene <BAR> startinsert <CR>"),
-      dashboard.button("r", "󰄉 最近", ":Telescope oldfiles <CR>"),
-      dashboard.button("g", "󰊄 搜索", ":Telescope live_grep <CR>"),
-      dashboard.button("c", "󰏘 配置", ":e $MYVIMRC <CR>"),
-      dashboard.button("l", "󰒲 插件", ":Lazy<CR>"),
-      dashboard.button("q", "󰗼 退出", ":qa<CR>"),
+      dashboard.button("f", "  查找文件", ":Telescope find_files <CR>"),
+      dashboard.button("n", "  新建文件", ":ene <BAR> startinsert <CR>"),
+      dashboard.button("g", "  文本搜索", ":Telescope live_grep <CR>"),
+      dashboard.button("r", "  最近文件", ":Telescope oldfiles <CR>"),
+      dashboard.button("c", "  配置", ":e $MYVIMRC <CR>"),
+      dashboard.button("s", "  恢复会话", "session"),
+      dashboard.button("x", "  扩展插件", ":LazyExtras<CR>"),
+      dashboard.button("l", "󰒲  插件管理", ":Lazy<CR>"),
+      dashboard.button("q", "  退出", ":qa<CR>"),
     }
     for _, button in ipairs(dashboard.section.buttons.val) do
       button.opts.hl = "AlphaButtons"
