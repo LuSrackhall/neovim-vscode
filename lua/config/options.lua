@@ -8,7 +8,7 @@ opt.termguicolors = true
 
 -- Visual enhancement
 opt.cursorline = true
-opt.cursorcolumn = true
+opt.cursorcolumn = false
 opt.colorcolumn = "80"
 opt.synmaxcol = 200
 
