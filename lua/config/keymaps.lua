@@ -543,7 +543,6 @@ vim.keymap.set({ "n", "v" }, "L", jump_to_next_tab, {
 -- --[[        按照惯例为NeoVim预留配置空位         ]] -- --
 -- --[[  ///////////////////////////////////////// ]] -- --
 -- --[[  TODO:                                      ]] -- --
--- --[[  * 为NeoVim配置 <C-s> 来保存当前文件        ]] -- --
 -- --[[  * <C-0> 在neovim中,通常不受支持,别费功夫了 ]] -- --
 -- --[[  * 为NeoVim预留配置空间                     ]] -- --
 -- --[[  * 为NeoVim预留配置空间                     ]] -- --
@@ -864,5 +863,10 @@ if not is_vscode() then
     silent = true,
     remap = true,
     desc = '关闭当前标签页'
+  })
+  -- 将 <C-s> 映射为保存当前标签页
+  vim.keymap.set('n', '<C-s>', ':w<CR>', {
+    silent = true,
+    desc = '保存当前标签页'
   })
 end
