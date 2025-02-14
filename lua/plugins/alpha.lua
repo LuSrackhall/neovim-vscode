@@ -56,10 +56,12 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "LazyVimStarted",
       callback = function()
-        local stats = require("lazy").stats()
-        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        dashboard.section.footer.val = "⚡ 加载了 " .. stats.count .. " 个插件，用时 " .. ms .. "ms"
-        pcall(vim.cmd.AlphaRedraw)
+        if #vim.fn.getbufinfo({ buflisted = true }) == 0 then
+          local stats = require("lazy").stats()
+          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          dashboard.section.footer.val = "⚡ 加载了 " .. stats.count .. " 个插件，用时 " .. ms .. "ms"
+          pcall(vim.cmd.AlphaRedraw)
+        end
       end,
     })
     require("alpha").setup(dashboard.opts)
