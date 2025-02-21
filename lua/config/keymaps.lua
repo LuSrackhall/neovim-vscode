@@ -872,6 +872,11 @@ if not is_vscode() then
 end
 
 if is_vscode() then
+  local ok, vscode = pcall(require, "vscode")
+  if not ok then
+    vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
+    return
+  end
   -- 水平滚动控制
   vim.keymap.set("n", "<C-l>", function()
     vscode.call("scrollRight", { to = "right", by = "halfPage" })
