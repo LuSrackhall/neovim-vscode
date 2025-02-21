@@ -870,3 +870,14 @@ if not is_vscode() then
     desc = '保存当前标签页'
   })
 end
+
+if is_vscode() then
+  -- 水平滚动控制
+  vim.keymap.set("n", "<C-l>", function()
+    vscode.call("scrollRight", { to = "right", by = "halfPage" })
+  end, { desc = "向右滚动" })
+
+  vim.keymap.set("n", "<C-h>", function()
+    vscode.call("scrollLeft", { to = "left", by = "halfPage" })
+  end, { desc = "向左滚动" })
+end
