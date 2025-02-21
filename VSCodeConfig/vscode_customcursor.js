@@ -120,6 +120,9 @@
     const h = c.size.y;
     const dx = c.src.x - c.pos.x;
     const dy = c.src.y - c.pos.y;
+    // 分别处理水平和垂直方向的移动
+    const horizontalMove = Math.abs(dx) > 0.1; // 降低水平移动的触发阈值
+    const verticalMove = Math.abs(dy) > 0.1; // 降低垂直移动的触发阈值
     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
 
     // 定义光标基本形状点
@@ -131,22 +134,27 @@
     ];
 
     // 处理移动状态下的光标形状
-    if (distance > 1) {
+    if (horizontalMove || verticalMove) {
       const t = ANIMATION_EASING(1 - percent);
       opacity = lerp(OPACITY, 1, t);
-      const clamped_x = (Math.min(MAX_LENGTH, distance) * dx) / distance;
-      const clamped_y = (Math.min(MAX_LENGTH, distance) * dy) / distance;
-      c.src.x = c.pos.x + clamped_x;
-      c.src.y = c.pos.y + clamped_y;
+      // 分别处理水平和垂直方向的拖尾
+      const maxLen = Math.min(MAX_LENGTH, distance);
+      const clamped_x = horizontalMove ? (maxLen * dx) / distance : 0;
+      const clamped_y = verticalMove ? (maxLen * dy) / distance : 0;
+      c.src.x = c.pos.x + (horizontalMove ? clamped_x : 0);
+      c.src.y = c.pos.y + (verticalMove ? clamped_y : 0);
 
       c.smear.x = lerp(c.src.x, c.pos.x, t);
       c.smear.y = lerp(c.src.y, c.pos.y, t);
 
-      // 计算光标形状的收缩效果
-      let tip_x_inset = lerp(w / 2 - (w / 2) * TIP_SHRINK, 0, t);
-      let tip_y_inset = lerp(h / 2 - (h / 2) * TIP_SHRINK, 0, t);
-      let trail_x_inset = lerp(w / 2 - (w / 2) * TAIL_SHRINK, 0, t);
-      let trail_y_inset = lerp(h / 2 - (h / 2) * TAIL_SHRINK, 0, t);
+      // 计算光标形状的收缩效果，为垂直移动增加额外的收缩
+      const verticalShrinkBoost = verticalMove ? 1.5 : 1.0;
+      const horizontalShrinkBoost = horizontalMove ? 1.5 : 1.0;
+
+      let tip_x_inset = lerp(w / 2 - (w / 2) * TIP_SHRINK * horizontalShrinkBoost, 0, t);
+      let tip_y_inset = lerp(h / 2 - (h / 2) * TIP_SHRINK * verticalShrinkBoost, 0, t);
+      let trail_x_inset = lerp(w / 2 - (w / 2) * TAIL_SHRINK * horizontalShrinkBoost, 0, t);
+      let trail_y_inset = lerp(h / 2 - (h / 2) * TAIL_SHRINK * verticalShrinkBoost, 0, t);
 
       // 定义光标尖端矩形
       const tip_rect = {
