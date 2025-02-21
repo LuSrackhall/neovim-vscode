@@ -173,8 +173,23 @@
 
     // 绘制光标形状
     ctx.save();
-    ctx.fillStyle = c.background;
+
+    // 创建渐变
+    const gradient = ctx.createLinearGradient(c.pos.x, c.pos.y, c.pos.x, c.pos.y + c.size.y);
+    gradient.addColorStop(0, "#b8860b"); // 暗金色起始
+    gradient.addColorStop(0.6, "#daa520"); // 中间过渡色
+    gradient.addColorStop(1, "#ffd700"); // 亮金色结束
+
+    // 设置增强的阴影效果
+    ctx.shadowColor = "#ffd700";
+    ctx.shadowBlur = 12;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+
     ctx.globalAlpha = opacity;
+    ctx.strokeStyle = "#b8860b";
+    ctx.fillStyle = gradient;
+    ctx.lineWidth = 0.5;
 
     ctx.beginPath();
     ctx.moveTo(points[0].x, points[0].y);
@@ -185,6 +200,7 @@
 
     ctx.closePath();
     ctx.fill();
+    ctx.stroke();
     ctx.restore();
 
     // 处理块状光标样式
@@ -220,9 +236,9 @@
     // 设置光标基本属性
     c.pos = { x: cp.left, y: cp.top };
     c.size = { x: cursor.offsetWidth, y: cursor.offsetHeight };
-    c.background = getComputedStyle(document.querySelector("body>.monaco-workbench"))
-      .getPropertyValue("--vscode-editorCursor-foreground")
-      .trim();
+    // c.background = getComputedStyle(document.querySelector("body>.monaco-workbench"))
+    //   .getPropertyValue("--vscode-editorCursor-foreground")
+    //   .trim();
     c.color = getComputedStyle(document.querySelector("body>.monaco-workbench"))
       .getPropertyValue("--vscode-editorCursor-background")
       .trim();
