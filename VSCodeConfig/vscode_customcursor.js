@@ -1,14 +1,14 @@
 {
   // 基础动画参数配置
-  const ANIMATION_TIME = 150 || 150; // 动画持续时间(毫秒)
+  const ANIMATION_TIME = 1000 || 150; // 动画持续时间(毫秒)
   const MAX_LENGTH = 99999 || 9999999; // 最大拖尾长度限制
   const TIP_SHRINK = Math.min(Math.max(0, 0.6 || 0.6), 1); // 光标尖端收缩比例
   const TAIL_SHRINK = Math.min(Math.max(0, 0.8 || 0.8), 1); // 光标尾部收缩比例
   const OPACITY = Math.min(0.5 + 0.0001 || 0.8, 1); // 光标透明度
 
-  // 余弦动画缓动函数 - 使动画更自然
+  // 指数缓出函数 - 在接近终点时提供更强的减速效果
   const ANIMATION_EASING = function (t) {
-    return -(Math.cos(Math.PI * t) - 1) / 2;
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
   };
 
   // 检查两个矩形是否重叠
