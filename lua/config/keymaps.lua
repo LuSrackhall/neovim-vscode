@@ -715,6 +715,7 @@ vim.keymap.set("n", "<leader>wk", function() focus_group("above") end, {
 --[[--------------------------------------------]]
 -- - -- ---------------------------------------- --  - --
 -- --[[  提供代码功能增强:                        ]] -- --
+-- --[[  * gb - 添加光标(在满足匹配规则的内容处)   ]] -- --
 -- --[[  * ge - 跳转到下一个问题                  ]] -- --
 -- --[[  * gl - 切换代码折叠                      ]] -- --
 -- --[[  * gh - 显示定义预览                      ]] -- --
@@ -744,6 +745,10 @@ function code_action(action)
         vscode.call("editor.action.dirtydiff.previous")
       elseif action == "context_menu" then
         vscode.call("editor.action.showContextMenu")
+      elseif action == "addCursor" then
+        -- vscode.with_insert(function ()
+        vscode.call("editor.action.addSelectionToNextFindMatch")
+        -- end)
       end
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
@@ -769,14 +774,16 @@ local code_mappings = {
     -- 查看上一个代码差异
     ["mgp"] = { action = "prev_change", desc = "查看上一个代码差异" },
     -- 打开上下文菜单
-    ["mgm"] = { action = "context_menu", desc = "打开上下文菜单" }
+    ["mgm"] = { action = "context_menu", desc = "打开上下文菜单" },
+    ["gb"] = { action = "addCursor", desc = "添加光标" } -- 添加光标(在满足匹配规则的内容处)
   },
   -- 可视模式下的映射
   visual = {
     -- 显示定义预览
     ["gh"] = { action = "show_hover", desc = "显示定义预览" },
     -- 打开上下文菜单
-    ["mgm"] = { action = "context_menu", desc = "打开上下文菜单" }
+    ["mgm"] = { action = "context_menu", desc = "打开上下文菜单" },
+    ["gb"] = { action = "addCursor", desc = "添加光标" } -- 添加光标(在满足匹配规则的内容处)
   }
 }
 
