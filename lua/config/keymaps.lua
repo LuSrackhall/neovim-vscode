@@ -646,6 +646,9 @@ vim.keymap.set("n", "<leader>gk", function() move_editor_to_group("above") end, 
 -- --[[  * <leader>wj - 移动光标到下侧窗口       ]] -- --
 -- --[[  * <leader>wk - 移动光标到上侧窗口       ]] -- --
 -- - -- ---------------------------------------- --  - --
+-- --[[  * mwl - 移动光标到右侧代码差异diff窗口  ]] -- --
+-- --[[  * mwh - 移动光标到左侧代码差异diff窗口  ]] -- --
+-- - -- ---------------------------------------- --  - --
 
 -- 移动光标到不同窗口的函数
 function focus_group(direction)
@@ -664,6 +667,10 @@ function focus_group(direction)
         vscode.call("workbench.action.focusBelowGroup")
       elseif direction == "above" then
         vscode.call("workbench.action.focusAboveGroup")
+      elseif direction == "diff_right" then
+        vscode.call("workbench.action.compareEditor.focusPrimarySide")
+      elseif direction == "diff_left" then
+        vscode.call("workbench.action.compareEditor.focusSecondarySide")
       end
     else
       vim.notify("VSCode 模块加载失败", vim.log.levels.WARN)
@@ -708,6 +715,16 @@ vim.keymap.set("n", "<leader>wj", function() focus_group("below") end, {
 vim.keymap.set("n", "<leader>wk", function() focus_group("above") end, {
   silent = true,
   desc = "移动光标到上侧窗口"
+})
+
+-- 新增 mg 组合键的代码差异窗口光标移动快捷键
+vim.keymap.set("n", "mwl", function() focus_group("diff_right") end, {
+  silent = true,
+  desc = "移动光标到右侧代码差异diff窗口"
+})
+vim.keymap.set("n", "mwh", function() focus_group("diff_left") end, {
+  silent = true,
+  desc = "移动光标到左侧代码差异diff窗口"
 })
 
 --[[--------------------------------------------]]
