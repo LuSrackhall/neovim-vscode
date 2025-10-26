@@ -72,4 +72,100 @@
   // 开始监听
   const targetElement = document.querySelector(".monaco-editor") || document.body;
   observer.observe(targetElement, observerConfig);
+
+  // 为Vibrancy毛玻璃插件打补丁 - 修复终端背景颜色异常问题
+  // 采用性能优化方案：节流 + 懒加载
+  let xtermFixTimeout = null;
+  let hasXtermElements = false;
+
+  function fixXtermBackgroundThrottled() {
+    // 清除之前的延时任务
+    if (xtermFixTimeout) {
+      clearTimeout(xtermFixTimeout);
+    }
+
+    // 节流：延迟执行，避免频繁 DOM 操作
+    xtermFixTimeout = setTimeout(() => {
+      const xtermElements = document.querySelectorAll(".xterm-scrollable-element");
+
+      if (xtermElements.length > 0) {
+        hasXtermElements = true;
+        xtermElements.forEach((el) => {
+          // 直接设置 inline style 覆盖
+          el.style.backgroundColor = "transparent";
+        });
+      }
+    }, 300); // 300ms 节流延迟
+  }
+
+  // 仅在首次检测到终端时启用监听
+  function setupXtermObserver() {
+    if (hasXtermElements) return; // 已设置过，不重复
+
+    const quickObserver = new MutationObserver((mutations) => {
+      // 只检查 xterm 相关的变化
+      let needsFix = false;
+
+      mutations.forEach((mutation) => {
+        if (mutation.type === "childList") {
+          // 检查新添加的节点
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1 && node.classList && node.classList.contains("xterm-scrollable-element")) {
+              needsFix = true;
+            }
+          });
+        }
+        if (mutation.type === "attributes" && mutation.attributeName === "style") {
+          if (mutation.target.classList && mutation.target.classList.contains("xterm-scrollable-element")) {
+            needsFix = true;
+          }
+        }
+      });
+
+      if (needsFix) {
+        fixXtermBackgroundThrottled();
+      }
+    });
+
+    // 只监听 xterm 容器相关区域
+    const xtermContainer =
+      document.querySelector(".terminal-container") || document.querySelector(".xterm") || document.body;
+
+    quickObserver.observe(xtermContainer, {
+      attributes: true,
+      attributeFilter: ["style"],
+      subtree: true,
+      childList: true,
+    });
+
+    hasXtermElements = true;
+  }
+
+  // 初始检查 - 在终端加载时启动
+  const initialCheckTimeout = setTimeout(() => {
+    const xtermElements = document.querySelectorAll(".xterm-scrollable-element");
+    if (xtermElements.length > 0) {
+      fixXtermBackgroundThrottled();
+      setupXtermObserver();
+    } else {
+      // 如果还没有找到，继续等待
+      const checkInterval = setInterval(() => {
+        const xtermCheck = document.querySelectorAll(".xterm-scrollable-element");
+        if (xtermCheck.length > 0) {
+          clearInterval(checkInterval);
+          fixXtermBackgroundThrottled();
+          setupXtermObserver();
+        }
+      }, 1000); // 每秒检查一次，直到找到终端
+
+      // 最多检查 10 次（10 秒）
+      let checkCount = 0;
+      const origInterval = setInterval(() => {
+        checkCount++;
+        if (checkCount >= 10) {
+          clearInterval(origInterval);
+        }
+      }, 1000);
+    }
+  }, 500);
 }
