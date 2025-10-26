@@ -606,12 +606,12 @@ canvas {
 }
 
 /* 定义代码滚动时顶部固定父级栏的样式为毛玻璃效果 */
-.monaco-editor .sticky-widget {
+.monaco-editor .sticky-widget .sticky-widget-line-numbers {
    background-color: rgba(31, 31, 31, 0.16) !important;
    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
    backdrop-filter: blur(10px) !important;
    -webkit-backdrop-filter: blur(10px) !important;
-   /* border: 1px solid rgba(255, 255, 255, 0.1) !important; */
+   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* 定义`ctrl+shift+p`的弹出框样式为毛玻璃效果, 与 .monaco-list .monaco-list-rows 结合使用才可达到效果*/
