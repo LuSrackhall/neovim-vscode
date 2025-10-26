@@ -74,98 +74,68 @@
   observer.observe(targetElement, observerConfig);
 
   // 为Vibrancy毛玻璃插件打补丁 - 修复终端背景颜色异常问题
-  // 采用性能优化方案：节流 + 懒加载
+  // 支持多个终端的方案
   let xtermFixTimeout = null;
-  let hasXtermElements = false;
 
-  function fixXtermBackgroundThrottled() {
-    // 清除之前的延时任务
+  function fixAllXtermBackgrounds() {
+    // 清除之前的延时任务，实现节流
     if (xtermFixTimeout) {
       clearTimeout(xtermFixTimeout);
     }
 
-    // 节流：延迟执行，避免频繁 DOM 操作
     xtermFixTimeout = setTimeout(() => {
+      // 查找所有 xterm-scrollable-element 元素（不管有多少个终端）
       const xtermElements = document.querySelectorAll(".xterm-scrollable-element");
+      xtermElements.forEach((el) => {
+        el.style.backgroundColor = "transparent";
+      });
+    }, 150); // 150ms 节流延迟
+  }
 
-      if (xtermElements.length > 0) {
-        hasXtermElements = true;
-        xtermElements.forEach((el) => {
-          // 直接设置 inline style 覆盖
-          el.style.backgroundColor = "transparent";
+  // 监听终端容器的变化，包括新增终端
+  const xtermObserver = new MutationObserver((mutations) => {
+    let shouldFix = false;
+
+    mutations.forEach((mutation) => {
+      // 检查是否添加了新的 xterm 相关节点
+      if (mutation.type === "childList") {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) {
+            // 检查该节点本身或其子节点是否包含 xterm-scrollable-element
+            if (node.classList && node.classList.contains("xterm-scrollable-element")) {
+              shouldFix = true;
+            }
+            if (node.querySelectorAll && node.querySelectorAll(".xterm-scrollable-element").length > 0) {
+              shouldFix = true;
+            }
+          }
         });
       }
-    }, 300); // 300ms 节流延迟
-  }
-
-  // 仅在首次检测到终端时启用监听
-  function setupXtermObserver() {
-    if (hasXtermElements) return; // 已设置过，不重复
-
-    const quickObserver = new MutationObserver((mutations) => {
-      // 只检查 xterm 相关的变化
-      let needsFix = false;
-
-      mutations.forEach((mutation) => {
-        if (mutation.type === "childList") {
-          // 检查新添加的节点
-          mutation.addedNodes.forEach((node) => {
-            if (node.nodeType === 1 && node.classList && node.classList.contains("xterm-scrollable-element")) {
-              needsFix = true;
-            }
-          });
+      // 检查是否修改了 xterm 元素的样式
+      if (mutation.type === "attributes" && mutation.attributeName === "style") {
+        if (mutation.target.classList && mutation.target.classList.contains("xterm-scrollable-element")) {
+          shouldFix = true;
         }
-        if (mutation.type === "attributes" && mutation.attributeName === "style") {
-          if (mutation.target.classList && mutation.target.classList.contains("xterm-scrollable-element")) {
-            needsFix = true;
-          }
-        }
-      });
-
-      if (needsFix) {
-        fixXtermBackgroundThrottled();
       }
     });
 
-    // 只监听 xterm 容器相关区域
-    const xtermContainer =
-      document.querySelector(".terminal-container") || document.querySelector(".xterm") || document.body;
-
-    quickObserver.observe(xtermContainer, {
-      attributes: true,
-      attributeFilter: ["style"],
-      subtree: true,
-      childList: true,
-    });
-
-    hasXtermElements = true;
-  }
-
-  // 初始检查 - 在终端加载时启动
-  const initialCheckTimeout = setTimeout(() => {
-    const xtermElements = document.querySelectorAll(".xterm-scrollable-element");
-    if (xtermElements.length > 0) {
-      fixXtermBackgroundThrottled();
-      setupXtermObserver();
-    } else {
-      // 如果还没有找到，继续等待
-      const checkInterval = setInterval(() => {
-        const xtermCheck = document.querySelectorAll(".xterm-scrollable-element");
-        if (xtermCheck.length > 0) {
-          clearInterval(checkInterval);
-          fixXtermBackgroundThrottled();
-          setupXtermObserver();
-        }
-      }, 1000); // 每秒检查一次，直到找到终端
-
-      // 最多检查 10 次（10 秒）
-      let checkCount = 0;
-      const origInterval = setInterval(() => {
-        checkCount++;
-        if (checkCount >= 10) {
-          clearInterval(origInterval);
-        }
-      }, 1000);
+    if (shouldFix) {
+      fixAllXtermBackgrounds();
     }
-  }, 500);
+  });
+
+  // 从终端面板容器开始监听，确保捕获所有终端
+  const panelArea = document.querySelector(".panel") || document.querySelector(".bottom-panel") || document.body;
+  xtermObserver.observe(panelArea, {
+    attributes: true,
+    attributeFilter: ["style"],
+    subtree: true,
+    childList: true,
+  });
+
+  // 初始化：处理已经存在的终端
+  setTimeout(() => {
+    fixAllXtermBackgrounds();
+    // }, 1000);
+  }, 300);
 }
