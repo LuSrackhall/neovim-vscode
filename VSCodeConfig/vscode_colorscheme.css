@@ -917,3 +917,23 @@ canvas {
         text-shadow: 0 0 30px #fc28a8;
     }
 }
+
+/* 修复插件vibrancy Container中未适配路径面包屑栏和标签栏的bug */
+.monaco-workbench .part.editor>.content .editor-group-container>.title {
+   background-color: rgba(31, 31, 31, 0.5) !important;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+   backdrop-filter: blur(10px) !important;
+   -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.monaco-breadcrumbs {
+  background-color: transparent !important;
+}
+
+.tabs-container>.tab.sizing-fit.last-in-row:not(:last-child) {
+  background-color: transparent !important;
+}
+
+.editor-group-container > .title > .tabs-and-actions-container.wrapping .tabs-container > .tab {
+  background-color: rgba(31, 31, 31, 0.1) !important;
+}
