@@ -109,15 +109,17 @@
 
   -webkit-text-stroke: 0.5px rgba(0, 255, 255, 0.4);
 
-  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.4)) drop-shadow(0 0 5px rgba(97, 226, 255, 0.3))
-    drop-shadow(0 0 10px rgba(3, 237, 249, 0.2));
+  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.6)) drop-shadow(0 0 5px rgba(97, 226, 255, 0.5))
+    drop-shadow(0 0 10px rgba(3, 237, 249, 0.3));
 }
 
-/* 随机字母强光晕效果 */
-.mtk3:nth-child(3n + 1),
-.mtk6:nth-child(3n + 1) {
-  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.6)) drop-shadow(0 0 6px rgba(97, 226, 255, 0.5))
-    drop-shadow(0 0 12px rgba(3, 237, 249, 0.4)) drop-shadow(0 0 18px rgba(97, 226, 255, 0.3));
+/* 随机字母强光晕效果 - 约每11个字母1个 */
+.mtk3:nth-of-type(11n + 1),
+.mtk6:nth-of-type(11n + 1),
+.mtk3:nth-child(11n + 1),
+.mtk6:nth-child(11n + 1) {
+  filter: drop-shadow(0 0 1px rgba(3, 237, 249, 0.7)) drop-shadow(0 0 4px rgba(97, 226, 255, 0.6))
+    drop-shadow(0 0 8px rgba(3, 237, 249, 0.5)) drop-shadow(0 0 12px rgba(97, 226, 255, 0.3));
 }
 
 .mtk3.mtki {
@@ -143,15 +145,17 @@
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.35);
 
-  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.35)) drop-shadow(0 0 5px rgba(255, 200, 0, 0.25))
-    drop-shadow(0 0 8px rgba(255, 170, 0, 0.15));
+  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.55)) drop-shadow(0 0 5px rgba(255, 200, 0, 0.45))
+    drop-shadow(0 0 8px rgba(255, 170, 0, 0.3));
 }
 
-/* 随机字母强光晕效果 */
-.mtk8:nth-child(3n + 1),
-.mtk9:nth-child(3n + 1) {
-  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.6)) drop-shadow(0 0 6px rgba(255, 200, 0, 0.5))
-    drop-shadow(0 0 12px rgba(255, 170, 0, 0.4)) drop-shadow(0 0 18px rgba(255, 204, 0, 0.3));
+/* 随机字母强光晕效果 - 约每11个字母1个 */
+.mtk8:nth-of-type(11n + 1),
+.mtk9:nth-of-type(11n + 1),
+.mtk8:nth-child(11n + 1),
+.mtk9:nth-child(11n + 1) {
+  filter: drop-shadow(0 0 1px rgba(255, 170, 0, 0.7)) drop-shadow(0 0 4px rgba(255, 200, 0, 0.6))
+    drop-shadow(0 0 8px rgba(255, 170, 0, 0.5)) drop-shadow(0 0 12px rgba(255, 204, 0, 0.3));
 }
 
 /* .mtk7 {
@@ -176,15 +180,17 @@
 
   -webkit-text-stroke: 0.5px rgba(59, 130, 246, 0.35);
 
-  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.35)) drop-shadow(0 0 5px rgba(59, 130, 246, 0.25))
-    drop-shadow(0 0 8px rgba(91, 158, 245, 0.15));
+  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.6)) drop-shadow(0 0 5px rgba(59, 130, 246, 0.5))
+    drop-shadow(0 0 8px rgba(91, 158, 245, 0.3));
 }
 
-/* 随机字母强光晕效果 */
-.mtk7:nth-child(3n + 1),
-.mtk10:nth-child(3n + 1) {
-  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.6)) drop-shadow(0 0 6px rgba(59, 130, 246, 0.5))
-    drop-shadow(0 0 12px rgba(91, 158, 245, 0.4)) drop-shadow(0 0 18px rgba(59, 130, 246, 0.3));
+/* 随机字母强光晕效果 - 约每11个字母1个 */
+.mtk7:nth-of-type(11n + 1),
+.mtk10:nth-of-type(11n + 1),
+.mtk7:nth-child(11n + 1),
+.mtk10:nth-child(11n + 1) {
+  filter: drop-shadow(0 0 1px rgba(91, 158, 245, 0.7)) drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))
+    drop-shadow(0 0 8px rgba(91, 158, 245, 0.5)) drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
 }
 
 .mtk10 {
@@ -197,14 +203,15 @@
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.3);
 
-  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.35)) drop-shadow(0 0 5px rgba(220, 220, 170, 0.25))
-    drop-shadow(0 0 8px rgba(255, 200, 0, 0.15));
+  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.55)) drop-shadow(0 0 5px rgba(220, 220, 170, 0.45))
+    drop-shadow(0 0 8px rgba(255, 200, 0, 0.3));
 }
 
-/* 随机字母强光晕效果 */
-.mtk16:nth-child(3n + 1) {
-  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.6)) drop-shadow(0 0 6px rgba(220, 220, 170, 0.5))
-    drop-shadow(0 0 12px rgba(255, 200, 0, 0.4)) drop-shadow(0 0 18px rgba(255, 200, 0, 0.3));
+/* 随机字母强光晕效果 - 约每11个字母1个 */
+.mtk16:nth-of-type(11n + 1),
+.mtk16:nth-child(11n + 1) {
+  filter: drop-shadow(0 0 1px rgba(255, 200, 0, 0.7)) drop-shadow(0 0 4px rgba(220, 220, 170, 0.6))
+    drop-shadow(0 0 8px rgba(255, 200, 0, 0.5)) drop-shadow(0 0 12px rgba(255, 200, 0, 0.3));
 }
 
 /* 通过开发者工具找到的青绿色配置 */
@@ -213,14 +220,15 @@
 
   -webkit-text-stroke: 0.5px rgba(78, 201, 176, 0.4);
 
-  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.35)) drop-shadow(0 0 5px rgba(78, 201, 176, 0.25))
-    drop-shadow(0 0 8px rgba(42, 123, 115, 0.15));
+  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.6)) drop-shadow(0 0 5px rgba(78, 201, 176, 0.5))
+    drop-shadow(0 0 8px rgba(42, 123, 115, 0.3));
 }
 
-/* 随机字母强光晕效果 */
-.mtk17:nth-child(3n + 1) {
-  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.6)) drop-shadow(0 0 6px rgba(78, 201, 176, 0.5))
-    drop-shadow(0 0 12px rgba(42, 123, 115, 0.4)) drop-shadow(0 0 18px rgba(78, 201, 176, 0.3));
+/* 随机字母强光晕效果 - 约每11个字母1个 */
+.mtk17:nth-of-type(11n + 1),
+.mtk17:nth-child(11n + 1) {
+  filter: drop-shadow(0 0 1px rgba(42, 123, 115, 0.7)) drop-shadow(0 0 4px rgba(78, 201, 176, 0.6))
+    drop-shadow(0 0 8px rgba(42, 123, 115, 0.5)) drop-shadow(0 0 12px rgba(78, 201, 176, 0.3));
 }
 
 /* .mtk19 {
