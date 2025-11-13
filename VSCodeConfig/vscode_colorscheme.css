@@ -109,8 +109,8 @@
 
   -webkit-text-stroke: 0.5px rgba(0, 255, 255, 0.4);
 
-  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.6)) drop-shadow(0 0 5px rgba(97, 226, 255, 0.5))
-    drop-shadow(0 0 10px rgba(3, 237, 249, 0.3));
+  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.3)) drop-shadow(0 0 5px rgba(97, 226, 255, 0.2))
+    drop-shadow(0 0 10px rgba(3, 237, 249, 0.1));
 }
 
 /* 随机字母强光晕效果 - 约每11个字母1个 */
@@ -118,8 +118,8 @@
 .mtk6:nth-of-type(11n + 1),
 .mtk3:nth-child(11n + 1),
 .mtk6:nth-child(11n + 1) {
-  filter: drop-shadow(0 0 1px rgba(3, 237, 249, 0.7)) drop-shadow(0 0 4px rgba(97, 226, 255, 0.6))
-    drop-shadow(0 0 8px rgba(3, 237, 249, 0.5)) drop-shadow(0 0 12px rgba(97, 226, 255, 0.3));
+  filter: drop-shadow(0 0 1px rgba(3, 237, 249, 0.4)) drop-shadow(0 0 4px rgba(97, 226, 255, 0.3))
+    drop-shadow(0 0 8px rgba(3, 237, 249, 0.25)) drop-shadow(0 0 12px rgba(97, 226, 255, 0.15));
 }
 
 .mtk3.mtki {
@@ -145,8 +145,8 @@
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.35);
 
-  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.55)) drop-shadow(0 0 5px rgba(255, 200, 0, 0.45))
-    drop-shadow(0 0 8px rgba(255, 170, 0, 0.3));
+  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.28)) drop-shadow(0 0 5px rgba(255, 200, 0, 0.2))
+    drop-shadow(0 0 8px rgba(255, 170, 0, 0.12));
 }
 
 /* 随机字母强光晕效果 - 约每11个字母1个 */
@@ -154,8 +154,8 @@
 .mtk9:nth-of-type(11n + 1),
 .mtk8:nth-child(11n + 1),
 .mtk9:nth-child(11n + 1) {
-  filter: drop-shadow(0 0 1px rgba(255, 170, 0, 0.7)) drop-shadow(0 0 4px rgba(255, 200, 0, 0.6))
-    drop-shadow(0 0 8px rgba(255, 170, 0, 0.5)) drop-shadow(0 0 12px rgba(255, 204, 0, 0.3));
+  filter: drop-shadow(0 0 1px rgba(255, 170, 0, 0.35)) drop-shadow(0 0 4px rgba(255, 200, 0, 0.25))
+    drop-shadow(0 0 8px rgba(255, 170, 0, 0.2)) drop-shadow(0 0 12px rgba(255, 204, 0, 0.12));
 }
 
 /* .mtk7 {
@@ -180,8 +180,8 @@
 
   -webkit-text-stroke: 0.5px rgba(59, 130, 246, 0.35);
 
-  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.6)) drop-shadow(0 0 5px rgba(59, 130, 246, 0.5))
-    drop-shadow(0 0 8px rgba(91, 158, 245, 0.3));
+  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.3)) drop-shadow(0 0 5px rgba(59, 130, 246, 0.2))
+    drop-shadow(0 0 8px rgba(91, 158, 245, 0.1));
 }
 
 /* 随机字母强光晕效果 - 约每11个字母1个 */
@@ -189,8 +189,8 @@
 .mtk10:nth-of-type(11n + 1),
 .mtk7:nth-child(11n + 1),
 .mtk10:nth-child(11n + 1) {
-  filter: drop-shadow(0 0 1px rgba(91, 158, 245, 0.7)) drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))
-    drop-shadow(0 0 8px rgba(91, 158, 245, 0.5)) drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
+  filter: drop-shadow(0 0 1px rgba(91, 158, 245, 0.4)) drop-shadow(0 0 4px rgba(59, 130, 246, 0.3))
+    drop-shadow(0 0 8px rgba(91, 158, 245, 0.25)) drop-shadow(0 0 12px rgba(59, 130, 246, 0.15));
 }
 
 .mtk10 {
@@ -203,15 +203,15 @@
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.3);
 
-  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.55)) drop-shadow(0 0 5px rgba(220, 220, 170, 0.45))
-    drop-shadow(0 0 8px rgba(255, 200, 0, 0.3));
+  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.28)) drop-shadow(0 0 5px rgba(220, 220, 170, 0.2))
+    drop-shadow(0 0 8px rgba(255, 200, 0, 0.12));
 }
 
 /* 随机字母强光晕效果 - 约每11个字母1个 */
 .mtk16:nth-of-type(11n + 1),
 .mtk16:nth-child(11n + 1) {
-  filter: drop-shadow(0 0 1px rgba(255, 200, 0, 0.7)) drop-shadow(0 0 4px rgba(220, 220, 170, 0.6))
-    drop-shadow(0 0 8px rgba(255, 200, 0, 0.5)) drop-shadow(0 0 12px rgba(255, 200, 0, 0.3));
+  filter: drop-shadow(0 0 1px rgba(255, 200, 0, 0.35)) drop-shadow(0 0 4px rgba(220, 220, 170, 0.25))
+    drop-shadow(0 0 8px rgba(255, 200, 0, 0.2)) drop-shadow(0 0 12px rgba(255, 200, 0, 0.12));
 }
 
 /* 通过开发者工具找到的青绿色配置 */
@@ -220,22 +220,22 @@
 
   -webkit-text-stroke: 0.5px rgba(78, 201, 176, 0.4);
 
-  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.6)) drop-shadow(0 0 5px rgba(78, 201, 176, 0.5))
-    drop-shadow(0 0 8px rgba(42, 123, 115, 0.3));
+  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.3)) drop-shadow(0 0 5px rgba(78, 201, 176, 0.2))
+    drop-shadow(0 0 8px rgba(42, 123, 115, 0.1));
 }
 
 /* 随机字母强光晕效果 - 约每11个字母1个 */
 .mtk17:nth-of-type(11n + 1),
 .mtk17:nth-child(11n + 1) {
-  filter: drop-shadow(0 0 1px rgba(42, 123, 115, 0.7)) drop-shadow(0 0 4px rgba(78, 201, 176, 0.6))
-    drop-shadow(0 0 8px rgba(42, 123, 115, 0.5)) drop-shadow(0 0 12px rgba(78, 201, 176, 0.3));
+  filter: drop-shadow(0 0 1px rgba(42, 123, 115, 0.4)) drop-shadow(0 0 4px rgba(78, 201, 176, 0.3))
+    drop-shadow(0 0 8px rgba(42, 123, 115, 0.25)) drop-shadow(0 0 12px rgba(78, 201, 176, 0.15));
 }
 
 .mtk3,
 .mtk6 {
   color: #61e2ff;
   text-shadow: 0 0 2px #001716, 0 0 3px #03edf933, 0px 0 15px #ffff6633, 0px -5px 15px #ffff6633, 0px 1px 15px #ffff6633,
-    0px 0 5px #00ffff99, 0px -5px 5px #00ffff99, 0px 1px 5px #00ffff99, 0px -5px 6px #00ffff99, 0px 2px 6px #00ffff99;
+    0px 0 5px #00ffff88, 0px -5px 5px #00ffff88, 0px 1px 5px #00ffff88, 0px -5px 6px #00ffff88, 0px 2px 6px #00ffff88;
 }
 
 .mtk3.mtki {
@@ -258,8 +258,8 @@
 .mtk9 {
   /* color: #fd8902; */
   color: #ffcc00;
-  text-shadow: 0 0 2px #100c0f, 0 0 3px #ffaa0099, 8px -2px 5px #ffaa0099, 8px 3px 5px #ffaa0099, 8px -3px 5px #ffaa0099,
-    0 0 10px #ffaa0099;
+  text-shadow: 0 0 2px #100c0f, 0 0 3px #ffaa0088, 8px -2px 5px #ffaa0088, 8px 3px 5px #ffaa0088, 8px -3px 5px #ffaa0088,
+    0 0 10px #ffaa0088;
   font-style: italic;
 }
 
@@ -282,13 +282,13 @@
 .mtk7,
 .mtk10 {
   color: #9cdcfe; /* 蓝色 */
-  text-shadow: 0 0 1px #001a33, /* 深蓝色，细光晕 */ 0 0 10px rgba(59, 130, 246, 0.6),
-    /* 浅蓝色，柔和光晕，透明度30% */ 5px 0 5px rgba(59, 130, 246, 0.6),
-    /* 浅蓝色，略微偏移，透明度30% */ 5px -2px 5px rgba(59, 130, 246, 0.6),
-    /* 浅蓝色，略微偏移，透明度30% */ 5px -4px 5px rgba(59, 130, 246, 0.6),
-    /* 浅蓝色，略微偏移，透明度30% */ 5px -2px 10px rgba(59, 130, 246, 0.6),
-    /* 浅蓝色，略微偏移，透明度30% */ 5px -4px 10px rgba(59, 130, 246, 0.6),
-    /* 浅蓝色，略微偏移，透明度30% */ 0 -1px 10px rgba(59, 130, 246, 0.6); /* 浅蓝色，反向偏移，透明度30% */
+  text-shadow: 0 0 1px #001a33, /* 深蓝色，细光晕 */ 0 0 10px rgba(59, 130, 246, 0.5),
+    /* 浅蓝色，柔和光晕，透明度30% */ 5px 0 5px rgba(59, 130, 246, 0.5),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -2px 5px rgba(59, 130, 246, 0.5),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -4px 5px rgba(59, 130, 246, 0.5),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -2px 10px rgba(59, 130, 246, 0.5),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -4px 10px rgba(59, 130, 246, 0.5),
+    /* 浅蓝色，略微偏移，透明度30% */ 0 -1px 10px rgba(59, 130, 246, 0.5); /* 浅蓝色，反向偏移，透明度30% */
 }
 
 .mtk10 {
@@ -299,8 +299,8 @@
 .mtk16 {
   color: #dcdcaa; /* 原始颜色 */
   text-shadow: 0 0 1px #4b3c0e, /* 深金色，细光晕 */ 0 0 2px rgba(255, 204, 0, 0.5),
-    /* 弱光晕 */ -6px 0 5px rgba(255, 204, 0, 0.9), /* 强烈的浅金色光晕 */ -6px 3px 5px rgba(255, 204, 0, 0.5),
-    /* 强烈的浅金色光晕 */ -6px -6px 5px rgba(255, 204, 0, 0.5),
+    /* 弱光晕 */ -6px 0 5px rgba(255, 204, 0, 0.8), /* 强烈的浅金色光晕 */ -6px 3px 5px rgba(255, 204, 0, 0.4),
+    /* 强烈的浅金色光晕 */ -6px -6px 5px rgba(255, 204, 0, 0.4),
     /* 强烈的浅金色光晕 */ -6px 3px 15px rgba(255, 204, 0, 0.15),
     /* 强烈的浅金色光晕 */ -6px -6px 15px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */ 0 0 3px #4b3c0e; /* 轻微的深金色光晕 */
 }
@@ -308,8 +308,8 @@
 /* 通过开发者工具找到的青绿色配置 */
 .mtk17 {
   color: #4ec9b0;
-  text-shadow: 0 0 5px #2a7b73, 0 0 2px rgba(78, 201, 176, 0.5), 8px -1px 5px rgba(78, 201, 176, 0.8),
-    8px -2px 8px rgba(78, 201, 176, 0.6), 0 0 3px #2a7b73;
+  text-shadow: 0 0 5px #2a7b73, 0 0 2px rgba(78, 201, 176, 0.5), 8px -1px 5px rgba(78, 201, 176, 0.7),
+    8px -2px 8px rgba(78, 201, 176, 0.5), 0 0 3px #2a7b73;
 }
 
 /* .mtk19 {
