@@ -676,21 +676,8 @@ canvas {
 
 
 /* hover flip specials */
-
-
-.mtk8, .mtk9, .mtk3, .mtk6, .mtk7, .mtk10 {
-    display: inline-block;
-    
-    transition: .4s transform;
-    /* transform: rotateX(0); */
-}
-
-
-.mtk8:hover, .mtk9:hover, .mtk3:hover, .mtk6:hover, .mtk7:hover, .mtk10:hover {
-    text-shadow: 2 2 15px;
-    transform: scale(1.2);
-}
-
+/* 已禁用: display: inline-block 会改变文本渲染导致字母位移 */
+/* 已禁用: transition 和 transform 也会影响基线位置 */
 
 /* end of hover flip specials */
 
