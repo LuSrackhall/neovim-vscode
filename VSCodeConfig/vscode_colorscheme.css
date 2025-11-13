@@ -105,10 +105,7 @@
 
 .mtk3,
 .mtk6 {
-  background: linear-gradient(120deg, #61e2ff 20%, #03edf9 50%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #61e2ff;
 
   -webkit-text-stroke: 0.5px rgba(0, 255, 255, 0.4);
 
@@ -134,10 +131,7 @@
 
 .mtk8,
 .mtk9 {
-  background: linear-gradient(120deg, #ffcc00 15%, #ffaa00 45%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffcc00;
   font-style: italic;
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.35);
@@ -164,10 +158,7 @@
 } */
 .mtk7,
 .mtk10 {
-  background: linear-gradient(120deg, #9cdcfe 18%, #5b9ef5 44%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #9cdcfe;
 
   -webkit-text-stroke: 0.5px rgba(59, 130, 246, 0.35);
 
@@ -181,10 +172,7 @@
 
 /* 通过开发者工具找到的暗金色配置 */
 .mtk16 {
-  background: linear-gradient(120deg, #dcdcaa 25%, #ffc800 44%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #dcdcaa;
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.3);
 
@@ -194,10 +182,7 @@
 
 /* 通过开发者工具找到的青绿色配置 */
 .mtk17 {
-  background: linear-gradient(120deg, #4ec9b0 20%, #2a9d7e 44%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #4ec9b0;
 
   -webkit-text-stroke: 0.5px rgba(78, 201, 176, 0.4);
 
