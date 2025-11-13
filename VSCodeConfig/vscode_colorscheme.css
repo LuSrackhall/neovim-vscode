@@ -109,8 +109,15 @@
 
   -webkit-text-stroke: 0.5px rgba(0, 255, 255, 0.4);
 
-  filter: drop-shadow(0 0 3px rgba(3, 237, 249, 0.6)) drop-shadow(0 0 8px rgba(97, 226, 255, 0.4))
-    drop-shadow(0 0 12px rgba(0, 255, 255, 0.2));
+  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.4)) drop-shadow(0 0 5px rgba(97, 226, 255, 0.3))
+    drop-shadow(0 0 10px rgba(3, 237, 249, 0.2));
+}
+
+/* 随机字母强光晕效果 */
+.mtk3:nth-child(3n + 1),
+.mtk6:nth-child(3n + 1) {
+  filter: drop-shadow(0 0 2px rgba(3, 237, 249, 0.6)) drop-shadow(0 0 6px rgba(97, 226, 255, 0.5))
+    drop-shadow(0 0 12px rgba(3, 237, 249, 0.4)) drop-shadow(0 0 18px rgba(97, 226, 255, 0.3));
 }
 
 .mtk3.mtki {
@@ -136,8 +143,15 @@
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.35);
 
-  filter: drop-shadow(0 0 4px rgba(255, 170, 0, 0.6)) drop-shadow(0 0 9px rgba(255, 204, 0, 0.4))
-    drop-shadow(0 0 14px rgba(255, 200, 0, 0.2));
+  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.35)) drop-shadow(0 0 5px rgba(255, 200, 0, 0.25))
+    drop-shadow(0 0 8px rgba(255, 170, 0, 0.15));
+}
+
+/* 随机字母强光晕效果 */
+.mtk8:nth-child(3n + 1),
+.mtk9:nth-child(3n + 1) {
+  filter: drop-shadow(0 0 2px rgba(255, 170, 0, 0.6)) drop-shadow(0 0 6px rgba(255, 200, 0, 0.5))
+    drop-shadow(0 0 12px rgba(255, 170, 0, 0.4)) drop-shadow(0 0 18px rgba(255, 204, 0, 0.3));
 }
 
 /* .mtk7 {
@@ -162,8 +176,15 @@
 
   -webkit-text-stroke: 0.5px rgba(59, 130, 246, 0.35);
 
-  filter: drop-shadow(0 0 3px rgba(91, 158, 245, 0.6)) drop-shadow(0 0 8px rgba(59, 130, 246, 0.4))
-    drop-shadow(0 0 12px rgba(100, 150, 255, 0.2));
+  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.35)) drop-shadow(0 0 5px rgba(59, 130, 246, 0.25))
+    drop-shadow(0 0 8px rgba(91, 158, 245, 0.15));
+}
+
+/* 随机字母强光晕效果 */
+.mtk7:nth-child(3n + 1),
+.mtk10:nth-child(3n + 1) {
+  filter: drop-shadow(0 0 2px rgba(91, 158, 245, 0.6)) drop-shadow(0 0 6px rgba(59, 130, 246, 0.5))
+    drop-shadow(0 0 12px rgba(91, 158, 245, 0.4)) drop-shadow(0 0 18px rgba(59, 130, 246, 0.3));
 }
 
 .mtk10 {
@@ -176,8 +197,14 @@
 
   -webkit-text-stroke: 0.5px rgba(255, 204, 0, 0.3);
 
-  filter: drop-shadow(0 0 5px rgba(255, 200, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 200, 0, 0.3))
-    drop-shadow(0 0 15px rgba(255, 200, 0, 0.2));
+  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.35)) drop-shadow(0 0 5px rgba(220, 220, 170, 0.25))
+    drop-shadow(0 0 8px rgba(255, 200, 0, 0.15));
+}
+
+/* 随机字母强光晕效果 */
+.mtk16:nth-child(3n + 1) {
+  filter: drop-shadow(0 0 2px rgba(255, 200, 0, 0.6)) drop-shadow(0 0 6px rgba(220, 220, 170, 0.5))
+    drop-shadow(0 0 12px rgba(255, 200, 0, 0.4)) drop-shadow(0 0 18px rgba(255, 200, 0, 0.3));
 }
 
 /* 通过开发者工具找到的青绿色配置 */
@@ -186,8 +213,14 @@
 
   -webkit-text-stroke: 0.5px rgba(78, 201, 176, 0.4);
 
-  filter: drop-shadow(0 0 4px rgba(42, 123, 115, 0.6)) drop-shadow(0 0 9px rgba(78, 201, 176, 0.4))
-    drop-shadow(0 0 13px rgba(100, 200, 170, 0.2));
+  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.35)) drop-shadow(0 0 5px rgba(78, 201, 176, 0.25))
+    drop-shadow(0 0 8px rgba(42, 123, 115, 0.15));
+}
+
+/* 随机字母强光晕效果 */
+.mtk17:nth-child(3n + 1) {
+  filter: drop-shadow(0 0 2px rgba(42, 123, 115, 0.6)) drop-shadow(0 0 6px rgba(78, 201, 176, 0.5))
+    drop-shadow(0 0 12px rgba(42, 123, 115, 0.4)) drop-shadow(0 0 18px rgba(78, 201, 176, 0.3));
 }
 
 /* .mtk19 {
