@@ -3,20 +3,14 @@
 /*                   最后可以配合vscode经典主题(现代深色) 来使用                       */
 /**************************************************************************************/
 
-
-
-
-
-
-
 /*--------------- 文件标签名 + 代码提示菜单(不过会被专用的代码提示菜单替换) ----------------*/
-.monaco-icon-label>.monaco-icon-label-container>.monaco-icon-name-container>.label-name::before {
-  content: "";          /*和 position 一起使用。用于实例化这个元素*/
-  position: absolute;   /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
-  margin-left: 19px;     /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  margin-top: 1px;      /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  width: 10px;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
-  height: 68%;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
+.monaco-icon-label > .monaco-icon-label-container > .monaco-icon-name-container > .label-name::before {
+  content: ""; /*和 position 一起使用。用于实例化这个元素*/
+  position: absolute; /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
+  margin-left: 19px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  margin-top: 1px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  width: 10px; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
+  height: 68%; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
   /* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
 
   /* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
@@ -25,15 +19,15 @@
   filter: blur(23.18px);
 }
 
-.monaco-icon-label>.monaco-icon-label-container>.monaco-icon-name-container>.label-name::after {
-  content: "";          /*和 position 一起使用。用于实例化这个元素*/
-  position: absolute;   /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
-  margin-left: -35px;   /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  margin-top: 1px;      /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  width: 10px;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
-  height: 68%;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
+.monaco-icon-label > .monaco-icon-label-container > .monaco-icon-name-container > .label-name::after {
+  content: ""; /*和 position 一起使用。用于实例化这个元素*/
+  position: absolute; /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
+  margin-left: -35px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  margin-top: 1px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  width: 10px; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
+  height: 68%; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
   /* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
-  
+
   /* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
   background: linear-gradient(-66deg, #47caff 17%, #f0f0dc 63%, #ffd8d8 20%);
   /* 使用filter来定义实例化元素的模糊效果*/
@@ -41,41 +35,40 @@
 }
 
 /*--------------- 代码提示菜单 --------------*/
-.monaco-editor .suggest-widget .monaco-list .monaco-list-row:not(.focused)>.contents>.main .monaco-icon-label{
+.monaco-editor .suggest-widget .monaco-list .monaco-list-row:not(.focused) > .contents > .main .monaco-icon-label {
   color: #dcdcaa; /* 原始颜色 */
-  text-shadow: 
-      0 0 1px #4b3c0e, /* 深金色，细光晕 */
-      0 0 2px rgba(255, 204, 0, 0.5), /* 弱光晕 */
-      -12px 0 5px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */
-      -12px 1px 5px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */
-      -12px -2px 5px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */
-      -12px 1px 5px rgba(255, 204, 0, 0.1), /* 强烈的浅金色光晕 */
-      -12px -2px 5px rgba(255, 204, 0, 0.1), /* 强烈的浅金色光晕 */
-
-      -6px 0 5px rgba(255, 204, 0, 0.1), /* 强烈的浅金色光晕 */
-      -6px 0.5px 5px rgba(255, 204, 0, 0.1), /* 强烈的浅金色光晕 */
-      -6px -1px 5px rgba(255, 204, 0, 0.1), /* 强烈的浅金色光晕 */
-      -6px 0.5px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-      -6px -1px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-
-
-      -5px 0 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-      -5px 0.5px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-      -5px -1px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-      -5px 0.5px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-      -5px -1px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */
-      0 0 3px #4b3c0e; /* 轻微的深金色光晕 */
+  text-shadow: 0 0 1px #4b3c0e, /* 深金色，细光晕 */ 0 0 2px rgba(255, 204, 0, 0.5),
+    /* 弱光晕 */ -12px 0 5px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */ -12px 1px 5px rgba(255, 204, 0, 0.15),
+    /* 强烈的浅金色光晕 */ -12px -2px 5px rgba(255, 204, 0, 0.15),
+    /* 强烈的浅金色光晕 */ -12px 1px 5px rgba(255, 204, 0, 0.1),
+    /* 强烈的浅金色光晕 */ -12px -2px 5px rgba(255, 204, 0, 0.1),
+    /* 强烈的浅金色光晕 */ -6px 0 5px rgba(255, 204, 0, 0.1),
+    /* 强烈的浅金色光晕 */ -6px 0.5px 5px rgba(255, 204, 0, 0.1),
+    /* 强烈的浅金色光晕 */ -6px -1px 5px rgba(255, 204, 0, 0.1),
+    /* 强烈的浅金色光晕 */ -6px 0.5px 5px rgba(255, 204, 0, 0.05),
+    /* 强烈的浅金色光晕 */ -6px -1px 5px rgba(255, 204, 0, 0.05),
+    /* 强烈的浅金色光晕 */ -5px 0 5px rgba(255, 204, 0, 0.05),
+    /* 强烈的浅金色光晕 */ -5px 0.5px 5px rgba(255, 204, 0, 0.05),
+    /* 强烈的浅金色光晕 */ -5px -1px 5px rgba(255, 204, 0, 0.05),
+    /* 强烈的浅金色光晕 */ -5px 0.5px 5px rgba(255, 204, 0, 0.05),
+    /* 强烈的浅金色光晕 */ -5px -1px 5px rgba(255, 204, 0, 0.05), /* 强烈的浅金色光晕 */ 0 0 3px #4b3c0e; /* 轻微的深金色光晕 */
   filter: blur(0px); /*加上这行之后, 后面的after和before的位置就会变得正常*/
 }
 
-.monaco-editor .suggest-widget .monaco-list .monaco-list-row:not(.focused)>.contents>.main .monaco-icon-label-container::before {
-  content: "";          /*和 position 一起使用。用于实例化这个元素*/
-  position: absolute;   /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
+.monaco-editor
+  .suggest-widget
+  .monaco-list
+  .monaco-list-row:not(.focused)
+  > .contents
+  > .main
+  .monaco-icon-label-container::before {
+  content: ""; /*和 position 一起使用。用于实例化这个元素*/
+  position: absolute; /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
   left: 0;
-  margin-left: 15px;     /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  margin-top: 0px;      /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  width: 17px;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
-  height: 66%;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
+  margin-left: 15px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  margin-top: 0px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  width: 17px; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
+  height: 66%; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
   /* background-color: rgba(78, 193, 250, 0.9); */ /*用于测试位置*/
 
   /* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
@@ -86,16 +79,22 @@
   border-radius: 5px;
 }
 
-.monaco-editor .suggest-widget .monaco-list .monaco-list-row:not(.focused)>.contents>.main .monaco-icon-label-container::after {
-  content: "";          /*和 position 一起使用。用于实例化这个元素*/
-  position: absolute;   /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
+.monaco-editor
+  .suggest-widget
+  .monaco-list
+  .monaco-list-row:not(.focused)
+  > .contents
+  > .main
+  .monaco-icon-label-container::after {
+  content: ""; /*和 position 一起使用。用于实例化这个元素*/
+  position: absolute; /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
   right: 25px;
-  margin-left: -15px;   /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  margin-top: 1px;      /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
-  width: 15px;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
-  height: 66%;          /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
+  margin-left: -15px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  margin-top: 1px; /*使用margin来定位, 防止元素的定位受父元素的定位影响*/
+  width: 15px; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值*/
+  height: 66%; /*使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响*/
   /* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
-  
+
   /* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
   background: linear-gradient(-66deg, #47caff 17%, #f0f0dc 63%, #ffd8d8 20%);
   /* 使用filter来定义实例化元素的模糊效果*/
@@ -104,22 +103,11 @@
   border-radius: 5px;
 }
 
-
-
 .mtk3,
 .mtk6 {
   color: #61e2ff;
-  text-shadow: 
-    0 0 2px #001716, 
-    0 0 3px #03edf933, 
-    0px 0 15px #ffff6633,
-    0px -5px 15px #ffff6633,
-    0px 1px 15px #ffff6633,
-    0px 0 5px #00ffff99,
-    0px -5px 5px #00ffff99,
-    0px 1px 5px #00ffff99,
-    0px -5px 6px #00ffff99,
-    0px 2px 6px #00ffff99; 
+  text-shadow: 0 0 2px #001716, 0 0 3px #03edf933, 0px 0 15px #ffff6633, 0px -5px 15px #ffff6633, 0px 1px 15px #ffff6633,
+    0px 0 5px #00ffff99, 0px -5px 5px #00ffff99, 0px 1px 5px #00ffff99, 0px -5px 6px #00ffff99, 0px 2px 6px #00ffff99;
 }
 
 .mtk3.mtki {
@@ -136,19 +124,13 @@
   0 0 20px rgba(106, 153, 85, 0.4), 
   0 0 3px rgba(255, 214, 0, 0.2), 
   0 0 5px rgba(255, 255, 255, 0.2); */
-
 }
 
 .mtk8,
 .mtk9 {
   /* color: #fd8902; */
   color: #ffcc00;
-  text-shadow: 
-    0 0 2px #100c0f, 
-    0 0 3px #ffaa0099, 
-    8px -2px 5px #ffaa0099,
-    8px 3px 5px #ffaa0099,
-    8px -3px 5px #ffaa0099,
+  text-shadow: 0 0 2px #100c0f, 0 0 3px #ffaa0099, 8px -2px 5px #ffaa0099, 8px 3px 5px #ffaa0099, 8px -3px 5px #ffaa0099,
     0 0 10px #ffaa0099;
   font-style: italic;
 }
@@ -172,47 +154,34 @@
 .mtk7,
 .mtk10 {
   color: #9cdcfe; /* 蓝色 */
-  text-shadow: 0 0 1px #001a33, /* 深蓝色，细光晕 */
-              0 0 10px rgba(59, 130, 246, 0.6), /* 浅蓝色，柔和光晕，透明度30% */
-              5px 0 5px rgba(59, 130, 246, 0.6), /* 浅蓝色，略微偏移，透明度30% */
-              5px -2px 5px rgba(59, 130, 246, 0.6), /* 浅蓝色，略微偏移，透明度30% */
-              5px -4px 5px rgba(59, 130, 246, 0.6), /* 浅蓝色，略微偏移，透明度30% */
-              5px -2px 10px rgba(59, 130, 246, 0.6), /* 浅蓝色，略微偏移，透明度30% */
-              5px -4px 10px rgba(59, 130, 246, 0.6), /* 浅蓝色，略微偏移，透明度30% */
-              0 -1px 10px rgba(59, 130, 246, 0.6); /* 浅蓝色，反向偏移，透明度30% */
+  text-shadow: 0 0 1px #001a33, /* 深蓝色，细光晕 */ 0 0 10px rgba(59, 130, 246, 0.6),
+    /* 浅蓝色，柔和光晕，透明度30% */ 5px 0 5px rgba(59, 130, 246, 0.6),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -2px 5px rgba(59, 130, 246, 0.6),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -4px 5px rgba(59, 130, 246, 0.6),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -2px 10px rgba(59, 130, 246, 0.6),
+    /* 浅蓝色，略微偏移，透明度30% */ 5px -4px 10px rgba(59, 130, 246, 0.6),
+    /* 浅蓝色，略微偏移，透明度30% */ 0 -1px 10px rgba(59, 130, 246, 0.6); /* 浅蓝色，反向偏移，透明度30% */
 }
-
-
 
 .mtk10 {
   font-style: italic;
 }
 
-
 /* 通过开发者工具找到的暗金色配置 */
 .mtk16 {
   color: #dcdcaa; /* 原始颜色 */
-  text-shadow: 
-      0 0 1px #4b3c0e, /* 深金色，细光晕 */
-      0 0 2px rgba(255, 204, 0, 0.5), /* 弱光晕 */
-      -6px 0 5px rgba(255, 204, 0, 0.9), /* 强烈的浅金色光晕 */
-      -6px 3px 5px rgba(255, 204, 0, 0.5), /* 强烈的浅金色光晕 */
-      -6px -6px 5px rgba(255, 204, 0, 0.5), /* 强烈的浅金色光晕 */
-      -6px 3px 15px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */
-      -6px -6px 15px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */
-      0 0 3px #4b3c0e; /* 轻微的深金色光晕 */
+  text-shadow: 0 0 1px #4b3c0e, /* 深金色，细光晕 */ 0 0 2px rgba(255, 204, 0, 0.5),
+    /* 弱光晕 */ -6px 0 5px rgba(255, 204, 0, 0.9), /* 强烈的浅金色光晕 */ -6px 3px 5px rgba(255, 204, 0, 0.5),
+    /* 强烈的浅金色光晕 */ -6px -6px 5px rgba(255, 204, 0, 0.5),
+    /* 强烈的浅金色光晕 */ -6px 3px 15px rgba(255, 204, 0, 0.15),
+    /* 强烈的浅金色光晕 */ -6px -6px 15px rgba(255, 204, 0, 0.15), /* 强烈的浅金色光晕 */ 0 0 3px #4b3c0e; /* 轻微的深金色光晕 */
 }
 
 /* 通过开发者工具找到的青绿色配置 */
 .mtk17 {
   color: #4ec9b0;
-  text-shadow: 
-    0 0 5px #2a7b73,
-    0 0 2px rgba(78, 201, 176, 0.5), 
-    8px -1px 5px rgba(78, 201, 176, 0.8),
-    8px -2px 8px rgba(78, 201, 176, 0.6), 
-    0 0 3px #2a7b73; 
-
+  text-shadow: 0 0 5px #2a7b73, 0 0 2px rgba(78, 201, 176, 0.5), 8px -1px 5px rgba(78, 201, 176, 0.8),
+    8px -2px 8px rgba(78, 201, 176, 0.6), 0 0 3px #2a7b73;
 }
 
 /* .mtk19 {
@@ -240,38 +209,35 @@
 } */
 
 /* .mtk19::before { */
-  /* content: "";          和 position 一起使用。用于实例化这个元素 */
-  /* position: absolute;   和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准 */
-  /* margin-left: 1px;     使用margin来定位, 防止元素的定位受父元素的定位影响 */
-  /* margin-top: 3px;      使用margin来定位, 防止元素的定位受父元素的定位影响 */
-  /* width: 16px;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值 */
-  /* height: 66%;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响 */
-  /* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
+/* content: "";          和 position 一起使用。用于实例化这个元素 */
+/* position: absolute;   和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准 */
+/* margin-left: 1px;     使用margin来定位, 防止元素的定位受父元素的定位影响 */
+/* margin-top: 3px;      使用margin来定位, 防止元素的定位受父元素的定位影响 */
+/* width: 16px;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值 */
+/* height: 66%;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响 */
+/* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
 
-  /* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
-  /* background: linear-gradient(-66deg, #ffffff 17%, #f0f0dc 63%, #ffd8d8 20%); */
-  /* 使用filter来定义实例化元素的模糊效果*/
-  /* filter: blur(6px); */
-  
+/* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
+/* background: linear-gradient(-66deg, #ffffff 17%, #f0f0dc 63%, #ffd8d8 20%); */
+/* 使用filter来定义实例化元素的模糊效果*/
+/* filter: blur(6px); */
+
 /* } */
 
 /* .mtk19::after { */
-  /* content: "";          和 position 一起使用。用于实例化这个元素 */
-  /* position: absolute;   和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准 */
-  /* margin-left: -18px;   使用margin来定位, 防止元素的定位受父元素的定位影响 */
-  /* margin-top: 3px;      使用margin来定位, 防止元素的定位受父元素的定位影响 */
-  /* width: 20px;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值 */
-  /* height: 66%;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响 */
-  /* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
-  
-  /* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
-  /* background: linear-gradient(-66deg, #ffffff 17%, #f0f0dc 63%, #ffd8d8 20%); */
-  /* 使用filter来定义实例化元素的模糊效果*/
-  /* filter: blur(5px); */
+/* content: "";          和 position 一起使用。用于实例化这个元素 */
+/* position: absolute;   和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准 */
+/* margin-left: -18px;   使用margin来定位, 防止元素的定位受父元素的定位影响 */
+/* margin-top: 3px;      使用margin来定位, 防止元素的定位受父元素的定位影响 */
+/* width: 20px;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 因此我们使用固定值 */
+/* height: 66%;          使用width和height来定义实例化元素的尺寸, 注意: 使用百分比是以父元素为准的, 但此处是纵向, 对我们不影响 */
+/* background-color: rgba(79, 193, 250, 0.9); */ /*用于测试位置*/
+
+/* 使用background来定义实例化元素的背景, 使用linear-gradient来定义背景的渐变效果*/
+/* background: linear-gradient(-66deg, #ffffff 17%, #f0f0dc 63%, #ffd8d8 20%); */
+/* 使用filter来定义实例化元素的模糊效果*/
+/* filter: blur(5px); */
 /* } */
-
-
-
 
 .monaco-editor .margin,
 .monaco-editor-background,
@@ -280,12 +246,7 @@
 }
 
 /* 禁用主页的图片显示 */
-.monaco-workbench.vs-dark
-  .part.editor
-  > .content
-  .editor-group-container.empty
-  .editor-group-watermark
-  > .letterpress {
+.monaco-workbench.vs-dark .part.editor > .content .editor-group-container.empty .editor-group-watermark > .letterpress {
   /* background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cdefs%3E%3ClinearGradient x1='50%25' y1='0%25' x2='50%25' y2='97.6652818%25' id='linearGradient-1'%3E%3Cstop stop-color='%23FC28A8' offset='0%25'%3E%3C/stop%3E%3Cstop stop-color='%2303EDF9' offset='100%25'%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='letterpress-dark' fill='url(%23linearGradient-1)'%3E%3Cg id='Group'%3E%3Cpath d='M30.2354,39.8836 C29.9195,39.8862 29.6057,39.8287 29.3109,39.7139 C28.9896,39.5885 28.6977,39.3979 28.4539,39.1539 L12.6999,24.7799 L9.23917,27.4037 L5.83434,29.986 C5.70454,30.0845 5.56201,30.1626 5.41164,30.2189 C5.20259,30.2976 4.9783,30.3339 4.7519,30.3239 C4.36361,30.3068 3.99356,30.1543 3.70588,29.8929 L1.50588,27.8929 C1.33452,27.7368 1.19763,27.5466 1.10396,27.3346 C1.01029,27.1225 0.961914,26.8933 0.961914,26.6614 C0.961914,26.4296 1.01029,26.2004 1.10396,25.9883 C1.19763,25.7762 1.33452,25.5861 1.50588,25.4299 L7.45788,19.9999 L4.67072,17.4532 L1.50734,14.5689 C1.33584,14.4129 1.19883,14.2227 1.10507,14.0107 C1.01132,13.7986 0.962891,13.5693 0.962891,13.3374 C0.962891,13.1056 1.01132,12.8763 1.10507,12.6642 C1.19883,12.4521 1.33584,12.262 1.50734,12.1059 L3.70734,10.1059 C3.72926,10.086 3.75165,10.0667 3.7745,10.048 C4.05213,9.82027 4.39666,9.68789 4.7569,9.67196 C5.14519,9.65479 5.52725,9.77401 5.83688,10.0089 L12.6999,15.2179 L28.4519,0.843942 C28.5452,0.751682 28.6455,0.666763 28.7519,0.589942 C29.1153,0.325601 29.5436,0.164633 29.9911,0.124137 C30.0919,0.11502 30.1928,0.112086 30.2933,0.115234 C30.6444,0.123748 30.9918,0.206443 31.3117,0.360027 L39.5477,4.32103 C39.9716,4.52522 40.3292,4.84487 40.5795,5.24325 C40.7787,5.56023 40.9035,5.9168 40.9462,6.28629 C40.9574,6.38148 40.9632,6.47754 40.9633,6.57401 L40.9633,6.67295 C40.9633,6.65781 40.9631,6.64268 40.9627,6.62757 L40.9627,33.3704 C40.9631,33.3552 40.9633,33.3401 40.9633,33.3249 L40.9633,33.4199 C40.9633,33.5146 40.9579,33.609 40.9472,33.7025 C40.9055,34.0754 40.7802,34.4355 40.5793,34.7552 C40.329,35.1534 39.9714,35.4729 39.5477,35.677 L31.3117,39.638 C31.0191,39.7785 30.7037,39.8596 30.3833,39.879 C30.3341,39.882 30.2848,39.8835 30.2354,39.8836 Z M30.9509,10.9369 L19.0028,19.9987 L30.9549,29.0639 L30.9509,10.9369 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   position: relative;
   z-index: 1; */
@@ -293,15 +254,27 @@
 }
 
 /* 禁用主页图片显示下方的提示信息 */
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-group-watermark>.shortcuts>.watermark-box {
+.monaco-workbench
+  .part.editor
+  > .content
+  .editor-group-container
+  > .editor-group-watermark
+  > .shortcuts
+  > .watermark-box {
   /* display: none; */
   margin-top: 100px;
 }
 
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-group-watermark>.shortcuts>.watermark-box::before {
-  content: "玄殿\A\A\A\A\Axuanhall";   /* 玄殿 */ /* xuanhall */
-  white-space: pre;  /* 添加这行来保留换行符 */
-  position: absolute;   /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
+.monaco-workbench
+  .part.editor
+  > .content
+  .editor-group-container
+  > .editor-group-watermark
+  > .shortcuts
+  > .watermark-box::before {
+  content: "玄殿\A\A\A\A\Axuanhall"; /* 玄殿 */ /* xuanhall */
+  white-space: pre; /* 添加这行来保留换行符 */
+  position: absolute; /*和 content 一起使用。用于实例化的元素, 其附带的定位不需要, 因为附带的定位会以父元素为准*/
   width: 100%;
   height: 100%;
   /* left: 30%;
@@ -317,41 +290,38 @@
   font-size: 80px;
 
   /* 字体样式 */
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-style: italic;
   /* font-weight: bold; */
 
   /*  字体渐变 */
   /* background: linear-gradient(120deg, #41d1ff 6%, #ff00ae 15%);  */
   /* background: linear-gradient(120deg, #41d1ff 16%, #ff00ae );  */
-  background: linear-gradient(120deg, #41d1ff 25%, #ff00ae 44% ); 
+  background: linear-gradient(120deg, #41d1ff 25%, #ff00ae 44%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  
+
   /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);   文字阴影 */
   /* 这个发光效果无法和字体渐变同时使用 */
   /* color: #dcdcaa; */
   /* text-shadow:  */
-      /* 0 0 1px #4b3c0e, 深金色，细光晕 */
-      /* 0 0 2px rgba(255, 204, 0, 0.5), 弱光晕 */
-      /* 9px 0 5px rgba(255, 204, 0, 0.9), 强烈的浅金色光晕 */
-      /* 9px 9px 5px rgba(255, 204, 0, 0.5), 强烈的浅金色光晕 */
-      /* 9px -5px 5px rgba(255, 204, 0, 0.5), 强烈的浅金色光晕 */
-      /* 9px 9px 15px rgba(255, 204, 0, 0.15), 强烈的浅金色光晕 */
-      /* 9px -5px 15px rgba(255, 204, 0, 0.15), 强烈的浅金色光晕 */
-      /* 0 0 9px #4b3c0e; 轻微的深金色光晕 */
+  /* 0 0 1px #4b3c0e, 深金色，细光晕 */
+  /* 0 0 2px rgba(255, 204, 0, 0.5), 弱光晕 */
+  /* 9px 0 5px rgba(255, 204, 0, 0.9), 强烈的浅金色光晕 */
+  /* 9px 9px 5px rgba(255, 204, 0, 0.5), 强烈的浅金色光晕 */
+  /* 9px -5px 5px rgba(255, 204, 0, 0.5), 强烈的浅金色光晕 */
+  /* 9px 9px 15px rgba(255, 204, 0, 0.15), 强烈的浅金色光晕 */
+  /* 9px -5px 15px rgba(255, 204, 0, 0.15), 强烈的浅金色光晕 */
+  /* 0 0 9px #4b3c0e; 轻微的深金色光晕 */
 
-  
-  
   /* 改用新的添加发光效果的方式, 以和字体渐变同时使用 */
   /* 添加描边 */
   -webkit-text-stroke: 1px rgba(255, 204, 0, 0.3);
-  
+
   /* 修改发光效果 */
-  filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5))
-         drop-shadow(0 0 10px rgba(255, 204, 0, 0.3))
-         drop-shadow(0 0 15px rgba(255, 204, 0, 0.2));
+  filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 204, 0, 0.3))
+    drop-shadow(0 0 15px rgba(255, 204, 0, 0.2));
 }
 
 /* Add the subtle gradient to the editor background */
@@ -376,11 +346,7 @@
   height: 300px;
   width: 100%;
   display: block;
-  background-image: linear-gradient( 
-      90deg,
-      rgba(252, 25, 154, 0.1) 1px,
-      rgba(0, 0, 0, 0) 1px
-    ),
+  background-image: linear-gradient(90deg, rgba(252, 25, 154, 0.1) 1px, rgba(0, 0, 0, 0) 1px),
     linear-gradient(0deg, rgba(252, 25, 154, 0.1) 1px, rgba(0, 0, 0, 0) 1px);
   background-position: bottom;
   background-repeat: repeat;
@@ -400,13 +366,7 @@
 /* .monaco-editor > .overflow-guard > .monaco-scrollable-element:before { */
 .monaco-editor:before,
 .editor-group-container:before {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 2px,
-    #fff 2px,
-    #fff 4px
-  );
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, #fff 2px, #fff 4px);
   background-size: 100% 4px cover;
   transform-origin: 50% 50%;
   content: "";
@@ -446,13 +406,7 @@ canvas {
   background: linear-gradient(to bottom, #fff951 25%, #fc28a8);
 } */
 
-.monaco-workbench
-  .part.editor
-  > .content
-  .editor-group-container
-  > .title
-  .tabs-container
-  > .tab.sizing-fit::after {
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit::after {
   content: "";
   position: absolute;
   bottom: -1px;
@@ -464,35 +418,23 @@ canvas {
 }
 
 /* Active sidebar item */
-.monaco-workbench
-  .activitybar
-  > .content
-  .monaco-action-bar
-  .action-item.checked {
+.monaco-workbench .activitybar > .content .monaco-action-bar .action-item.checked {
   box-shadow: inset 0 -5px 25px #fc28a825;
   position: relative;
 }
 
-.monaco-workbench
-  .activitybar
-  > .content
-  .monaco-action-bar
-  .action-item.checked::after {
+.monaco-workbench .activitybar > .content .monaco-action-bar .action-item.checked::after {
   content: "";
   position: absolute;
   bottom: 0px;
   top: 0px;
   left: 0px;
   width: 4px;
-  background: linear-gradient(to bottom, #fc28a8, #03edf9) !important; 
+  background: linear-gradient(to bottom, #fc28a8, #03edf9) !important;
   opacity: 1;
 }
 
-.monaco-workbench
-  .activitybar
-  > .content
-  .monaco-action-bar
-  .action-item::after {
+.monaco-workbench .activitybar > .content .monaco-action-bar .action-item::after {
   content: "";
   position: absolute;
   bottom: 0px;
@@ -504,25 +446,13 @@ canvas {
 }
 
 /* Active tab neon */
-.monaco-workbench
-  .part.editor
-  > .content
-  .editor-group-container
-  > .title
-  .tabs-container
-  > .tab.active {
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.active {
   position: relative;
   --tab-border-bottom-color: transparent !important;
 }
 
 /* Active tab stripe */
-.monaco-workbench
-  .part.editor
-  > .content
-  .editor-group-container
-  > .title
-  .tabs-container
-  > .tab.active::before {
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.active::before {
   content: "";
   position: absolute;
   bottom: -1px;
@@ -555,8 +485,6 @@ canvas {
   color: #241b2f;
 }
 
-
-
 .monaco-inputbox > .wrapper > textarea.input::selection {
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -568,7 +496,7 @@ canvas {
 } */
 
 .monaco-editor .line-numbers {
-  color:#2E8B57; /*#006400;*/
+  color: #2e8b57; /*#006400;*/
   text-shadow: 0 0 1px #001716, 0 0 1px #00ff00, 0 0 1px #00ff00;
 }
 
@@ -577,14 +505,14 @@ canvas {
   background: #1f1f1f !important;
 }
 
-
 .monaco-list .monaco-list-row.focused:not(.selected) {
-    /* 定义聚焦但未选中样式 */
+  /* 定义聚焦但未选中样式 */
   /* background-color: #04395e !important; */
 }
 
 .monaco-list-row.focused, /*定义聚焦样式*/
-.monaco-list-row.selected {  /*定义选中样式*/
+.monaco-list-row.selected {
+  /*定义选中样式*/
   /* background-color: #8a2dc033 !important; 111222333*/
   /* background-color: #00000033 !important; */
 }
@@ -601,17 +529,17 @@ canvas {
 
 .vs-dark .monaco-scrollable-element > .scrollbar > .slider {
   /* background: rgb(153, 99, 255); 111222333*/
-  background: #888080; 
+  background: #888080;
   opacity: 0.5;
 }
 
 /* 定义代码滚动时顶部固定父级栏的样式为毛玻璃效果 */
 .monaco-editor .sticky-widget .sticky-widget-line-numbers {
-   background-color: rgba(31, 31, 31, 0.16) !important;
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-   backdrop-filter: blur(10px) !important;
-   -webkit-backdrop-filter: blur(10px) !important;
-   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(31, 31, 31, 0.16) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* 定义`ctrl+shift+p`的弹出框样式为毛玻璃效果, 与 .monaco-list .monaco-list-rows 结合使用才可达到效果*/
@@ -629,7 +557,6 @@ canvas {
   -webkit-backdrop-filter: blur(10px) !important; */
 }
 
-
 /*********************************************************************
 /*********              动画部分(Animation)                   *******/
 /*********************************************************************
@@ -637,119 +564,124 @@ canvas {
 /* 111222333 */
 /* @import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,100&display=swap'); */
 
-
 /* 下面被111222333包围的是上方@import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,100&display=swap');链接中的文本内容 */
 /* 111222333 */
 /* vietnamese */
 @font-face {
-  font-family: 'Tourney';
+  font-family: "Tourney";
   font-style: italic;
   font-weight: 100;
   font-stretch: 100%;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/tourney/v13/AlZc_ztDtYzv1tzq_Q47flUUvI2wpXz29ilymEMLMNc3XHnT8UKaJwB5C1b8GA.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+  src: url(https://fonts.gstatic.com/s/tourney/v13/AlZc_ztDtYzv1tzq_Q47flUUvI2wpXz29ilymEMLMNc3XHnT8UKaJwB5C1b8GA.woff2)
+    format("woff2");
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304,
+    U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Tourney';
+  font-family: "Tourney";
   font-style: italic;
   font-weight: 100;
   font-stretch: 100%;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/tourney/v13/AlZc_ztDtYzv1tzq_Q47flUUvI2wpXz29ilymEMLMNc3XHnT8UKaJwB4C1b8GA.woff2) format('woff2');
-  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  src: url(https://fonts.gstatic.com/s/tourney/v13/AlZc_ztDtYzv1tzq_Q47flUUvI2wpXz29ilymEMLMNc3XHnT8UKaJwB4C1b8GA.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
-  font-family: 'Tourney';
+  font-family: "Tourney";
   font-style: italic;
   font-weight: 100;
   font-stretch: 100%;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/tourney/v13/AlZc_ztDtYzv1tzq_Q47flUUvI2wpXz29ilymEMLMNc3XHnT8UKaJwB2C1Y.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url(https://fonts.gstatic.com/s/tourney/v13/AlZc_ztDtYzv1tzq_Q47flUUvI2wpXz29ilymEMLMNc3XHnT8UKaJwB2C1Y.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* 111222333 */
 
-
-
-
 /* hover flip specials */
 
+.mtk8,
+.mtk9,
+.mtk3,
+.mtk6,
+.mtk7,
+.mtk10 {
+  display: inline-block;
 
-.mtk8, .mtk9, .mtk3, .mtk6, .mtk7, .mtk10 {
-    display: inline-block;
-    
-    transition: .4s transform;
-    /* transform: rotateX(0); */
+  transition: 0.4s transform;
+  /* transform: rotateX(0); */
 }
 
-
-.mtk8:hover, .mtk9:hover, .mtk3:hover, .mtk6:hover, .mtk7:hover, .mtk10:hover {
-    text-shadow: 2 2 15px;
-    transform: scale(1.2);
+.mtk8:hover,
+.mtk9:hover,
+.mtk3:hover,
+.mtk6:hover,
+.mtk7:hover,
+.mtk10:hover {
+  text-shadow: 2 2 15px;
+  transform: scale(1.2);
 }
-
 
 /* end of hover flip specials */
-
 
 /* tooltips */
 
 .monaco-editor .monaco-hover {
-    background-color: #262335;
-    display: block!important;
-    /* 手动注释掉padding, 以解决tooltip内容溢出问题。这个padding会导致tooltip内容显示不全, 所以注释掉了 */
-    /* padding: 20px; */
-    transition: opacity 1s !important;
-    opacity: 1;
-    animation: tooltippulse 4s infinite linear;
+  background-color: #262335;
+  display: block !important;
+  /* 手动注释掉padding, 以解决tooltip内容溢出问题。这个padding会导致tooltip内容显示不全, 所以注释掉了 */
+  /* padding: 20px; */
+  transition: opacity 1s !important;
+  opacity: 1;
+  animation: tooltippulse 4s infinite linear;
 }
 
 .monaco-editor .monaco-hover.hidden {
-    opacity: 0;
+  opacity: 0;
 }
 
 @keyframes tooltippulse {
-    0% {  
-        box-shadow: 0 0 0 0 rgba(255, 0, 242, 0);   
-    }
-    50% {
-        box-shadow: 0 0 85px 0 rgba(0, 217, 255, 0.5);  
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 0, 242, 0);
-    }    
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 242, 0);
+  }
+  50% {
+    box-shadow: 0 0 85px 0 rgba(0, 217, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 242, 0);
+  }
 }
 
 .monaco-editor .monaco-hover::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background-size: 200% 200%;
-    width: 100%;
-    background-image: linear-gradient(to right, #fc28a8, #03edf9, #fc28a8, #03edf9, #fc28a8);
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-size: 200% 200%;
+  width: 100%;
+  background-image: linear-gradient(to right, #fc28a8, #03edf9, #fc28a8, #03edf9, #fc28a8);
 
-    animation: neonline 2s infinite;
+  animation: neonline 2s infinite;
 }
 
 @keyframes neonline {
-    0% {  
-       background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }    
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
-
-
 /* end of tooltips */
-
 
 /* tabs */
 
@@ -773,55 +705,47 @@ canvas {
 /* end of tabs*/
 
 .monaco-editor .selected-text {
-    /* 111222333 */
-    /* background-color: #000000aa!important; */
-    /* 111222333 */
-    /* background-color: #000000aa!important; */
-    /* 111222333 */
-    background-color: #35aeda76!important;
-    box-shadow: 0 0 35px 5px #ff008d55;
-    color: #fff!important;
+  /* 111222333 */
+  /* background-color: #000000aa!important; */
+  /* 111222333 */
+  /* background-color: #000000aa!important; */
+  /* 111222333 */
+  background-color: #35aeda76 !important;
+  box-shadow: 0 0 35px 5px #ff008d55;
+  color: #fff !important;
 
-    /* 111222333 */
-    /* border:0.5px dashed red; */
-    /* 111222333 */
-    /* border-bottom:1px ridge rgba(211, 220, 50, 0.5); */
-    /* 111222333 */
-    /* border-top:1px ridge rgba(211, 220, 50, 0.5); */
+  /* 111222333 */
+  /* border:0.5px dashed red; */
+  /* 111222333 */
+  /* border-bottom:1px ridge rgba(211, 220, 50, 0.5); */
+  /* 111222333 */
+  /* border-top:1px ridge rgba(211, 220, 50, 0.5); */
 
-
-    /* 111222333 */
-    /* border-bottom:1px dashed rgba(211, 220, 50, 1); */
-    /* 111222333 */
-    /* border-top:1px dashed rgba(211, 220, 50, 1); */
- }
-
-
-.monaco-editor .cursor { 
-    box-shadow: 0 0 15px 2px #00c3ff;
-    animation: cursor .5s infinite linear;
+  /* 111222333 */
+  /* border-bottom:1px dashed rgba(211, 220, 50, 1); */
+  /* 111222333 */
+  /* border-top:1px dashed rgba(211, 220, 50, 1); */
 }
 
+.monaco-editor .cursor {
+  box-shadow: 0 0 15px 2px #00c3ff;
+  animation: cursor 0.5s infinite linear;
+}
 
 .editor-group-container:after {
-    animation: flight 2s infinite linear;
+  animation: flight 2s infinite linear;
 }
 
 .view-line .inline-folded:after {
-    color:yellow;
-    border-radius: 5px;
-    animation: colapse .5s linear;
+  color: yellow;
+  border-radius: 5px;
+  animation: colapse 0.5s linear;
 }
-
-
 
 .monaco-editor .line-numbers.active-line-number {
-    color: turquoise;
-    text-shadow: 0 0 1px yellow!important;
+  color: turquoise;
+  text-shadow: 0 0 1px yellow !important;
 }
-
-
-
 
 /* canvas.minimap-decorations-layer {
     background-color: transparent !important;
@@ -832,34 +756,30 @@ canvas {
 } */
 
 .monaco-editor .minimap-shadow-visible {
-    box-shadow: none!important;
+  box-shadow: none !important;
 }
 
-
-
-
-
 @keyframes colapse {
-    0% {  
-        background-color:yellow;
-        box-shadow: 0 0 5px 0 yellow;      
-    }
-    70% {
-        background-color: yellow;
-        box-shadow: 0 0 35px 10px yellow;
-    }
-    100% {
-        background-color: transparent;
-    }    
+  0% {
+    background-color: yellow;
+    box-shadow: 0 0 5px 0 yellow;
+  }
+  70% {
+    background-color: yellow;
+    box-shadow: 0 0 35px 10px yellow;
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 @keyframes cursor {
-    0% {  
-        box-shadow: 0 0 5px 0 #00c3ff;      
-    }
-    100% {
-        box-shadow: 0 0 35px 5px #00c3ff;
-    }
+  0% {
+    box-shadow: 0 0 5px 0 #00c3ff;
+  }
+  100% {
+    box-shadow: 0 0 35px 5px #00c3ff;
+  }
 }
 
 @keyframes flight {
@@ -871,66 +791,60 @@ canvas {
   }
 }
 
-
-
 .editor-container::after {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 
-    /* content: 'do epic shit...'; */
-    content: ' ';
-    font-weight: bold;
-    font-size: 5em;
-    font-family: 'Tourney', cursive;
+  /* content: 'do epic shit...'; */
+  content: " ";
+  font-weight: bold;
+  font-size: 5em;
+  font-family: "Tourney", cursive;
 
-    color: #fc28a822;
-    position: absolute;
-    /* 因为这个玩意是个不可见的长方形, 会造成覆盖区域鼠标不可用, 因此给他一个足够大的值, 将其移出编辑器使用范围 */
-    bottom: -99999px;
-    width: 100%;
-    overflow-x: hidden;
-    height: 120px;
-    
+  color: #fc28a822;
+  position: absolute;
+  /* 因为这个玩意是个不可见的长方形, 会造成覆盖区域鼠标不可用, 因此给他一个足够大的值, 将其移出编辑器使用范围 */
+  bottom: -99999px;
+  width: 100%;
+  overflow-x: hidden;
+  height: 120px;
 
-    text-shadow: 0 0 30px #fc28a8;
+  text-shadow: 0 0 30px #fc28a8;
 
-    /* 手动注释, 防止悬停的代码提示窗口, 10s后自动被关闭 */
-    /* animation: cnt 10s infinite linear; */
-
-
-
+  /* 手动注释, 防止悬停的代码提示窗口, 10s后自动被关闭 */
+  /* animation: cnt 10s infinite linear; */
 }
 
 @keyframes cnt {
-    0% {  
-        bottom: 150px;
-        font-size: 0.1em;
-        color: #fc28a822;       
-        text-shadow: 0 0 5px #fc28a811;
-    }
-    100% {
-        bottom: -400px;
-        font-size: 20em;       
-        color: #fc28a855;
-        text-shadow: 0 0 30px #fc28a8;
-    }
+  0% {
+    bottom: 150px;
+    font-size: 0.1em;
+    color: #fc28a822;
+    text-shadow: 0 0 5px #fc28a811;
+  }
+  100% {
+    bottom: -400px;
+    font-size: 20em;
+    color: #fc28a855;
+    text-shadow: 0 0 30px #fc28a8;
+  }
 }
 
 /* 修复插件vibrancy Container中未适配路径面包屑栏和标签栏的bug */
-.monaco-workbench .part.editor>.content .editor-group-container>.title {
-   background-color: rgba(31, 31, 31, 0.5) !important;
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-   backdrop-filter: blur(10px) !important;
-   -webkit-backdrop-filter: blur(10px) !important;
+.monaco-workbench .part.editor > .content .editor-group-container > .title {
+  background-color: rgba(31, 31, 31, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .monaco-breadcrumbs {
   background-color: transparent !important;
 }
 
-.tabs-container>.tab.sizing-fit.last-in-row:not(:last-child) {
+.tabs-container > .tab.sizing-fit.last-in-row:not(:last-child) {
   background-color: transparent !important;
 }
 
